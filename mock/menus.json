@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Home",
+    "path": "/",
+    "icon": "fa-th-large"
+  },
+  {
+    "name": "test",
+    "path": "/test",
+    "icon": "fa-th-large"
+  },
+  {
+    "name": "UI",
+    "path": "/",
+    "icon": "fa-flask",
+    "children": [{
+       "name": "buttons",
+       "path": "/buttons"
+    },{
+       "name": "typography",
+       "path": "/typography"
+    },{
+       "name": "test1",
+       "path": "/test1",
+       "children":[{
+        "name":"test2",
+        "path":"/test1"
+       },{
+        "name":"test3",
+        "path":"/test1"
+       }]
+    }]
+  },
+  {
+    "name": "Form",
+    "path": "/",
+    "icon": "fa-edit",
+    "children": [{
+       "name": "static",
+       "path": "/staticForm"
+    },{
+       "name": "dinamyc",
+       "path": "/dynamicForm"
+    },{
+       "name": "vform",
+       "path": "/vform"
+    }]
+  },
+  {
+    "name" : "Vista Profesor",
+    "path" : "/profesorView",
+    "icon" : "fa-address-book"
+  }
+]
