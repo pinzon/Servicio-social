@@ -1,5 +1,5 @@
 <template>
-<div class="ibox-content">
+<div class="">
     <div class="ibox float-e-margins">
           <div class="ibox-title">
             <h5>Rúbrica</h5>
@@ -46,10 +46,9 @@
                 </div>
               </div>
             </form>
-          </div>
-        </div>
-    <div class="row">
-        <table>
+
+            <div class="row ibox-content">
+        <table class="col-8">
             <thead>
                 <tr>
                     <th>#</th>
@@ -69,43 +68,57 @@
         </table>
 
     </div>
+          </div>
+        </div>
 </div>
 </template>
 <script>
 module.exports = {
-    data:function() {
-        return{
-            inputValue: "",
-            inputText: "",
-            tests:[{pts:10,txt:"Test"}],
-        }
-    },
-    computed:{
-      totalPoints: function(){
-        if(this.tests.length > 0){
-          total = 0
-          this.tests.forEach(element => {
-             total+= parseInt( element.pts)
-          });
-          return total
-        }
+  // props:{
+  //   content :{
+  //     type:Object,
+  //     default: () => {}
+  //   }
 
-        return 0;
+  // },
+  props:['content'],
+
+  data:function() {
+      return{
+          inputValue: "",
+          inputText: "",
+          tests:[],
       }
-    },
+  },
+  created: function(){
+    this.tests = this.content
+  },
+  computed:{
+    totalPoints: function(){
+      if(this.tests.length > 0){
+        total = 0
+        this.tests.forEach(element => {
+            total+= parseInt( element.pts)
+        });
+        return total
+      }
 
-    methods:{
-        addTest :function (){
-
-          this.tests.push({pts:this.inputValue,txt:this.inputText})
-          this.inputValue =""
-          this.inputText=""
-        },
-
-        removeTest: function(index){
-          this.tests.splice(index, 1);
-        }
+      return 0;
     }
+  },
+
+  methods:{
+      addTest :function (){
+
+        this.tests.push({pts:this.inputValue,txt:this.inputText})
+        this.inputValue =""
+        this.inputText=""
+      },
+
+      removeTest: function(index){
+        this.tests.splice(index, 1);
+      }
+  }
 }
 </script>
 

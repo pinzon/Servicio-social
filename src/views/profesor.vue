@@ -15,18 +15,20 @@
           </li>
         </ol>
       </div>
-      <div class="col-lg-2">
-
+      <div class="col-lg-2 p-md">
+        <button type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
+            <span class="bold">Guardar</span>
+        </button>
       </div>
     </div>
 
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
         <div class="col-lg-6">
-          <tinymce></tinymce>
+          <tinymce v-bind:content="content"></tinymce>
         </div>
         <div class="col-lg-6">
-          <rubrica></rubrica>
+          <rubrica v-bind:content="rubrica"></rubrica>
         </div>
         <div class="col-lg-12">
          
@@ -47,11 +49,28 @@
 <script>
 /* eslint-disable */
   export default {
+    data:function (params) {
+        return {
+          content:'Test de ejercicio',
+          rubrica: [{pts: 10 , txt: "test de parent to child"}],
+        }   
+    },
+
     components:{
       "tinymce" : require('../components/tinymce.vue').default,
       "rubrica" : require('../components/rubrica.vue').default
+    },
 
+    methods:{
+      saveEx : function() {
+        
+      },
+
+      getText:function() {
+        
+      }
     }
+
   }
 </script>
 <style scoped>

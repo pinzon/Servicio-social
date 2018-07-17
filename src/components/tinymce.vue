@@ -1,5 +1,5 @@
 <template>
-    <textarea></textarea>
+    <textarea v-model="content"></textarea>
 </template>
 <script>
 /* eslint-disable */
@@ -41,11 +41,15 @@ require('tinymce/plugins/help')
 
 
 export default {
+    props: ['content'],
+
     data:function(){return {
+
         
     }},
 
     mounted: function () {
+        var component = this
         tinyMCE.baseURL = '/static/'
         tinymce.init({
             selector: 'textarea',
@@ -53,7 +57,16 @@ export default {
             plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help',
             toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
-            codesample_content_css: 'skins/prism.css'
+            codesample_content_css: 'skins/prism.css',
+
+            setup:function(ed) {
+                ed.on('change', function(e) {
+                    // console.log('the event object ', e);
+                    // console.log('the editor object ', ed);
+                    // console.log('the content ', ed.getContent());
+                    component.content = ed.getContent();
+                });
+            }
         });
     }
 }
