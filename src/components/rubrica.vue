@@ -117,7 +117,9 @@ module.exports = {
 
       removeTest: function(index){
         this.tests.splice(index, 1);
-      }
+      },
+
+      
   }
 }
 </script>

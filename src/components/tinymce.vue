@@ -1,5 +1,5 @@
 <template>
-    <textarea v-model="content"></textarea>
+    <textarea></textarea>
 </template>
 <script>
 /* eslint-disable */
@@ -44,13 +44,20 @@ export default {
     props: ['content'],
 
     data:function(){return {
-
-        
+        saveText : ""
     }},
 
+    watch:{
+        content:function () {
+            tinyMCE.activeEditor.setContent(this.content);
+        }
+    },
+
     mounted: function () {
-        var component = this
+        let component = this
+        
         tinyMCE.baseURL = '/static/'
+
         tinymce.init({
             selector: 'textarea',
             height: 500,
@@ -60,14 +67,19 @@ export default {
             codesample_content_css: 'skins/prism.css',
 
             setup:function(ed) {
+                // var component = component
+                // console.log(coomponent)
                 ed.on('change', function(e) {
+                    // console.log(component)
                     // console.log('the event object ', e);
                     // console.log('the editor object ', ed);
                     // console.log('the content ', ed.getContent());
-                    component.content = ed.getContent();
+                    component.$emit('change', ed.getContent())
                 });
             }
+
         });
+
     }
 }
 </script>

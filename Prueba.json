@@ -1,0 +1,14 @@
+{
+  "ejercicio": [
+    {
+      "id": "1",
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>asdfasdfasdfasdfTest de base de asdf</p>\n</body>\n</html>"
+    }
+  ],
+  "rubrica": [
+    {
+      "id": 1,
+      "content": []
+    }
+  ]
+}
