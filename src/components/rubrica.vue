@@ -57,14 +57,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(condicion,index) in tests" v-bind:key="index">
+                <tr v-for="(condicion,index) in objetivos" v-bind:key="index">
                       <td>{{index + 1}}.- </td>
                       <td><b>{{condicion.pts}}pts</b></td>
                       <td>{{condicion.txt}}</td>
                       <td class="fa fa-trash" @click="removeTest(index)"><i></i></td>
                 </tr>
             </tbody>
-            <label><b>Total: {{totalPoints}}pts</b></label>
+            <label><b>Total: {{totalPoints}} pts</b></label>
         </table>
 
     </div>
@@ -74,53 +74,53 @@
 </template>
 <script>
 module.exports = {
-  // props:{
-  //   content :{
-  //     type:Object,
-  //     default: () => {}
-  //   }
-
-  // },
   props:['content'],
 
-  data:function() {
-      return{
-          inputValue: "",
-          inputText: "",
-          tests:[],
-      }
-  },
-  created: function(){
-    this.tests = this.content
-  },
-  computed:{
-    totalPoints: function(){
-      if(this.tests.length > 0){
-        total = 0
-        this.tests.forEach(element => {
-            total+= parseInt( element.pts)
-        });
-        return total
-      }
+  data:function(){return {
+        inputValue: "",
+        inputText: "",
+        objetivos:[],
+  }},
 
-      return 0;
-    }
-  },
+  watch:{
+        content:function () {
+          // console.log(content)
+            this.objetivos = this.content
+            // console.log('changed2')
+        }
+      },
 
   methods:{
       addTest :function (){
 
-        this.tests.push({pts:this.inputValue,txt:this.inputText})
+        this.objetivos.push({pts:this.inputValue,txt:this.inputText})
         this.inputValue =""
         this.inputText=""
+
+        this.$emit('change', this.objetivos)
       },
 
       removeTest: function(index){
-        this.tests.splice(index, 1);
-      },
+        this.objetivos.splice(index, 1);
 
-      
+
+        this.$emit('change', this.objetivos)
+      },
+  },
+  computed:{
+    totalPoints: function(){
+        if(this.objetivos.length > 0){
+          total = 0
+          this.objetivos.forEach(element => {
+              total+= parseInt( element.pts)
+          });
+          return total
+        }
+
+        return 0;
+      }
   }
+
 }
 </script>
 

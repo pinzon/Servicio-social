@@ -1,5 +1,5 @@
 <template>
-    <textarea></textarea>
+    <textarea v-model="content"></textarea>
 </template>
 <script>
 /* eslint-disable */
@@ -48,9 +48,9 @@ export default {
     }},
 
     watch:{
-        content:function () {
-            tinyMCE.activeEditor.setContent(this.content);
-        }
+        // content:function () {
+        //     tinyMCE.activeEditor.setContent(this.content);
+        // }
     },
 
     mounted: function () {

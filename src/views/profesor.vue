@@ -25,10 +25,10 @@
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
         <div class="col-lg-6">
-          <tinymce v-bind:content="content" v-on:change="textEdited" ></tinymce>
+          <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
         </div>
         <div class="col-lg-6">
-          <rubrica v-bind:content="rubrica"></rubrica>
+          <rubrica v-if="ajaxFinished" v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>
         </div>
         <div class="col-lg-12">
          
@@ -48,13 +48,17 @@
 
 <script>
 
-// import '../../source_page/js/jquery-3.1.1.min.js'
+// import swal from '../../source_page/js/plugins/sweetalert/sweetalert.min.js'
+import swal from 'sweetalert';
+
+
 /* eslint-disable */
 export default {
       data(){
             return {
                   content:'static',
-                  rubrica: [{pts: 10 , txt: "test de parent to child"}]
+                  rubrica: [],
+                  ajaxFinished: false,
             }
       },
 
@@ -68,20 +72,30 @@ export default {
                   this.content = text
             },
 
+            rubricaEdited: function (text) {
+                  console.log(text)
+                  this.rubrica = text
+            },
+
             saveEx : function() {
                   var component = this
-                  console.log("deleting data")
+                  // console.log("deleting data")
                   //delete previous exercise
                   $.ajax({
                         type: 'DELETE',
                         url: 'http://localhost:3000/ejercicio/1',
-                        success: function (data) {
+                        complete: function (data) {
                               $.ajax({
                                     type: 'POST',
                                     url: 'http://localhost:3000/ejercicio',
-                                    data: {id:1, content: component.content},
+                                    data: {
+                                          id:1, 
+                                          content: component.content,
+                                          rubrica: JSON.stringify(component.rubrica)
+                                          },
                                     success: function (data) {
-                                          console.log('data posted');      
+                                          // console.log('data posted'); 
+                                          swal("Guardado!", "Ejercicio guardado correctamente!", "success");     
                                     }
                               });
                         }
@@ -89,7 +103,7 @@ export default {
                   
             },
 
-            getRubrica: async function(){
+            getEjercicio: async function(){
                   // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
                   var component = this
                   // console.log($)
@@ -97,8 +111,20 @@ export default {
                         dataType: "json",
                         url: 'http://localhost:3000/ejercicio?id=1',
                         success: function (data) {
-                              console.log(data);
-                              component.content = data[0].content
+                              // console.log(JSON.parse(data));
+                              
+                              if(data[0] ){
+                                    component.content = data[0].content ? data[0].content : ''
+                                    component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
+                              }else{
+                                    component.content =  ''
+                                    component.rubrica = []
+                              }
+
+                              
+                        },
+                        complete:()=>{
+                              component.ajaxFinished = true
                         }
                   });
             }
@@ -107,7 +133,7 @@ export default {
       
 
       created: async function () {
-            this.getRubrica();
+            this.getEjercicio();
       }
             
 }
