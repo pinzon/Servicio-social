@@ -3,7 +3,7 @@
 </template>
 <script>
 
-require('/src/assets/js/tma_annotate');
+
 /* eslint-disable */
 require('tinymce');
 require('tinymce/themes/modern/theme');
@@ -40,6 +40,7 @@ require('tinymce/plugins/colorpicker')
 require('tinymce/plugins/textpattern')
 require('tinymce/plugins/help')
 
+require('../assets/js/tma_annotate/plugin.min.js');
 
 
 
@@ -67,8 +68,8 @@ export default {
         tinymce.init({
             selector: 'textarea',
             height: 500,
-            plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help',
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_annotate',
+            toolbar1: 'tma_annotate tma_annotatedelete tma_annotatehide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
             codesample_content_css: 'skins/prism.css',
 
