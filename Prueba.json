@@ -2,15 +2,8 @@
   "ejercicio": [
     {
       "id": "1",
-      "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>obligame prro</p>\n<p><strong>Pero como vas joputa</strong></p>\n<p><em>yolo</em></p>\n<p><em>swag</em></p>\n<p><em>este</em> <span style=\"text-decoration: line-through;\">men</span></p>\n</body>\n</html>",
-      "rubrica": "[{\"pts\":\"20\",\"txt\":\"no ser pendejo\"},{\"pts\":\"30\",\"txt\":\"Ya pinshi kevs\"},{\"pts\":\"1000\",\"txt\":\"Uff men\"}]",
-      "respuesta": "static"
-    },
-    {
-      "id": "2",
-      "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><strong>la puta madre</strong></p>\n</body>\n</html>",
-      "rubrica": "[{\"pts\":\"20\",\"txt\":\"no ser pendejo\"},{\"pts\":\"30\",\"txt\":\"Ya pinshi kevs\"},{\"pts\":\"1000\",\"txt\":\"Uff men\"}]",
-      "respuesta": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><em>static nigga</em></p>\n</body>\n</html>"
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><strong>la puta madre 2<br /></strong></p>\n</body>\n</html>",
+      "rubrica": "[{\"pts\":\"20\",\"txt\":\"no ser pendejo\"},{\"pts\":\"30\",\"txt\":\"Ya pinshi kevs\"},{\"pts\":\"1000\",\"txt\":\"Uff men\"}]"
     }
   ]
 }
