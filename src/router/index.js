@@ -36,6 +36,10 @@ export default new Router({
       {
         path: '/profesorView',
         component: require('../views/profesor.vue').default
+      },
+      {
+        path: '/studentView',
+        component: require('../views/student.vue').default
       }]
     }
   ]

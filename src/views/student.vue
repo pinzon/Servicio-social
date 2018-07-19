@@ -1,0 +1,266 @@
+<template>
+  <div>
+    <div class="row wrapper border-bottom white-bg page-heading">
+      <div class="col-lg-10">
+        <h2>Redactar ejercicio</h2>
+        <ol class="breadcrumb">
+          <li>
+            <a href="index.html">Home</a>
+          </li>
+          <li>
+            <a>UI Elements</a>
+          </li>
+          <li class="active">
+            <strong>Panels</strong>
+          </li>
+        </ol>
+      </div>
+      <div class="col-lg-2 p-md">
+        <button v-on:click="patchEjercicio" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
+            <span class="bold">Guardar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+        <!-- <div class="col-lg-12">
+            <span v-html="instruccion"></span>
+
+            
+            <button v-on:click="getEjer">Prueba</button>
+        </div> -->
+      <div class="row">
+        <div class="col-lg-6">
+            <!-- <span v-html="instruccion"></span>
+
+            
+            <button v-on:click="getEjer">Prueba</button> -->
+          <!-- <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce> -->
+        
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Tarea</h5>
+                </div>
+                <div class="ibox-content">
+                    <span v-html="instruccion"></span>
+                    <div class="row ibox-content">
+                        <!-- <button v-on:click="patchEjercicio">Prueba</button><br> -->
+                        <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-6">
+          <!-- <rubrica v-if="ajaxFinished" v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica> -->
+            
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Rubrica</h5>
+                </div>
+                <div class="ibox-content">
+                    
+                    <!-- <div class="row ibox-content"> -->
+                        <table >
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Puntos</th>
+                                    <th>Condición</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(condicion,index) in rubrix" v-bind:key="index">
+                                    <td>{{index + 1}}.- </td>
+                                    <td><b>{{condicion.pts}}pts</b></td>
+                                    <td>{{condicion.txt}}</td>
+                                </tr>
+                            </tbody>
+                            <label><b>Total: {{totalPoints}} pts</b></label>
+                        </table>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-12">
+         
+        </div>
+      </div>
+
+      <div class="row">
+        
+      </div>
+
+    </div>
+  </div>
+</template>
+
+<script>
+
+// import swal from '../../source_page/js/plugins/sweetalert/sweetalert.min.js'
+import swal from 'sweetalert';
+
+
+/* eslint-disable */
+export default {
+      data(){
+            return {
+                  instruccion: "",
+                  rubrix: [],
+                  puntos: 0,
+                  content:'static',
+                  rubrica: [],
+                  ajaxFinished: false,
+            }
+      },
+
+      components:{
+            "tinymce" : require('../components/tinymce.vue').default,
+            "rubrica" : require('../components/rubrica.vue').default
+            },
+
+      methods:{
+            textEdited: function (text) {
+                  this.content = text
+            },
+
+            // rubricaEdited: function (text) {
+            //       console.log(text)
+            //       this.rubrica = text
+            // },
+
+            saveEx : function() {
+                  var component = this
+                  // console.log("deleting data")
+                  //delete previous exercise
+                  $.ajax({
+                        type: 'DELETE',
+                        url: 'http://localhost:3000/ejercicio/1',
+                        complete: function (data) {
+                              $.ajax({
+                                    type: 'POST',
+                                    url: 'http://localhost:3000/ejercicio',
+                                    data: {
+                                          id:1, 
+                                          content: component.content,
+                                          rubrica: JSON.stringify(component.rubrica)
+                                          },
+                                    success: function (data) {
+                                          // console.log('data posted'); 
+                                          swal("Guardado!", "Ejercicio guardado correctamente!", "success");     
+                                    }
+                              });
+                        }
+                  });
+                  
+            },
+
+            // getEjercicio: async function(){
+            //       // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
+            //       var component = this
+            //       // console.log($)
+            //       $.ajax({
+            //             dataType: "json",
+            //             url: 'http://localhost:3000/ejercicio?id=1',
+            //             success: function (data) {
+            //                   // console.log(JSON.parse(data));
+                              
+            //                   if(data[0] ){
+            //                         component.content = data[0].content ? data[0].content : ''
+            //                         component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
+            //                   }else{
+            //                         component.content =  ''
+            //                         component.rubrica = []
+            //                   }
+
+                              
+            //             },
+            //             complete:()=>{
+            //                   component.ajaxFinished = true
+            //             }
+            //       });
+            // },
+            getEjer: function(){
+
+
+                var component = this
+                var rubo = []
+                  // console.log($)
+                  $.ajax({
+                        type: "GET",
+                        url: 'http://localhost:3000/ejercicio/1',
+                        success: function (data) {
+                            
+                            component.instruccion = data.content;
+                            JSON.parse(data.rubrica).forEach(rubro => {
+                                // console.log(rubro);
+                                rubo.push({pts:rubro.pts,txt:rubro.txt});
+                            });
+                                                          
+                        },
+                        complete:()=>{
+                              component.ajaxFinished = true
+                        }
+                         
+                  });
+                // this.instruccion = component.content;
+                this.rubrix = rubo;
+            },
+            patchEjercicio: function(){
+
+
+                var component = this
+                // var rubo = []
+                  // console.log($)
+                  $.ajax({
+                        type: "PATCH",
+                        url: 'http://localhost:3000/ejercicio/1',
+                        data: {
+                            // op: "replace",
+                            respuesta: component.content,
+                            // { "op": "replace", "path": "/content", "value": "boo" },
+                            // { "op": "add", "path": "/hello", "value": ["world"] },
+                            // { "op": "remove", "path": "/foo" }
+                            
+                        },
+
+                        success: function (data) {
+                            // console.log(data);
+                            swal("Guardado!", "Ejercicio guardado correctamente!", "success");
+                                                          
+                        },
+                        complete:()=>{
+                            console.log('Etsito');
+                            
+                        }
+                         
+                  });
+            }
+      },
+      computed:{
+        totalPoints: function(){
+            if(this.rubrix.length > 0){
+                var total = 0
+                this.rubrix.forEach(ele => {
+                    total+= parseInt( ele.pts)
+                });
+                    return total
+            }
+
+            return 0;
+        }
+      },
+
+      
+
+      created: async function () {
+            // this.getEjercicio();
+            this.getEjer();
+      }
+            
+}
+</script>
+<style scoped>
+</style>

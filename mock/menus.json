@@ -50,5 +50,10 @@
     "name" : "Vista Profesor",
     "path" : "/profesorView",
     "icon" : "fa-address-book"
+  },
+  {
+    "name" : "Vista Alumno",
+    "path" : "/studentView",
+    "icon" : "fa-address-book"
   }
 ]
