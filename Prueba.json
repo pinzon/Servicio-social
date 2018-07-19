@@ -3,7 +3,8 @@
     {
       "id": "1",
       "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p><strong>la puta madre 2<br /></strong></p>\n</body>\n</html>",
-      "rubrica": "[{\"pts\":\"20\",\"txt\":\"no ser pendejo\"},{\"pts\":\"30\",\"txt\":\"Ya pinshi kevs\"},{\"pts\":\"1000\",\"txt\":\"Uff men\"}]"
+      "rubrica": "[{\"pts\":\"1\",\"txt\":\"test\"}]",
+      "respuesta": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>aasdfasdfasdfasdfasdfasd</p>\n</body>\n</html>"
     }
   ]
 }
