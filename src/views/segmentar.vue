@@ -15,11 +15,13 @@
           </li>
         </ol>
       </div>
+      <!--
       <div class="col-lg-2 p-md">
         <button v-on:click="saveEx" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
             <span class="bold">Guardar</span>
         </button>
       </div>
+      -->
     </div>
 
     <div class="wrapper wrapper-content animated fadeIn">
@@ -28,7 +30,8 @@
           <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
         </div>
         <div class="col-lg-6">
-          <rubrica v-if="ajaxFinished" v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>
+          <!--
+          <rubrica v-if="ajaxFinished" v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>-->
         </div>
         <div class="col-lg-12">
          
@@ -63,7 +66,7 @@ export default {
       },
 
       components:{
-            "tinymce" : require('../components/tinymce.vue').default,
+            "tinymce" : require('../components/comments.vue').default,
             "rubrica" : require('../components/rubrica.vue').default
             },
 
@@ -79,8 +82,6 @@ export default {
 
             saveEx : function() {
                   var component = this
-                  // console.log("deleting data")
-                  //delete previous exercise
                   $.ajax({
                         type: 'DELETE',
                         url: 'http://localhost:3000/ejercicio/1',

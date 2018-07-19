@@ -55,5 +55,10 @@
     "name" : "Vista Alumno",
     "path" : "/studentView",
     "icon" : "fa-address-book"
+  },
+  {
+    "name" : "Segmentar Vista",
+    "path" : "/segmentarView",
+    "icon" : "fa-address-book"
   }
 ]
