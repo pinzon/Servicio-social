@@ -2,9 +2,9 @@
   "ejercicio": [
     {
       "id": "1",
-      "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>asdfasdfasdfasdfasdf</p>\n</body>\n</html>",
-      "rubrica": "[{\"pts\":\"1\",\"txt\":\"Not a test\"},{\"pts\":\"2\",\"txt\":\"2\"}]",
-      "respuesta": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>este es un test del ejercicio</p>\n</body>\n</html>"
+      "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>Test de ejercicio</p>\n</body>\n</html>",
+      "rubrica": "[{\"pts\":\"1\",\"txt\":\"Test de true\",\"value\":false},{\"pts\":\"1\",\"txt\":\"test de false\",\"value\":false}]",
+      "respuesta": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>sdgfasdfasdfasdfasdf</p>\n</body>\n</html>"
     }
   ]
 }

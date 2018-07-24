@@ -2,7 +2,7 @@
   <div>
     <div class="row wrapper border-bottom white-bg page-heading">
       <div class="col-lg-10">
-        <h2>Redactar ejercicio</h2>
+        <h2>Calificar ejercicio</h2>
         <ol class="breadcrumb">
           <li>
             <a href="index.html">Home</a>
@@ -53,42 +53,9 @@
         </div>
 
         <div class="col-lg-6">
-          <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica>
+          <rubrica v-if="ajaxFinished" type="asistant" v-bind:content="rubrica"  ></rubrica>
             
-            <!-- <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Rubrica</h5>
-                </div>
-                <div class="ibox-content">
-                    
-                   <div class="row ibox-content"> 
-                        <table >
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Puntos</th>
-                                    <th>Condición</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(condicion,index) in rubrica" v-bind:key="index">
-                                    <td>
-                                        <i v-if="condicion.value" class="fa fa-check" aria-hidden="true"></i>
-                                        <i v-else class="fa fa-times" aria-hidden="true"></i>
-                                    
-                                    </td>
-
-                                    <td>{{index + 1}}.- </td>
-                                    <td><b>{{condicion.pts}}pts</b></td>
-                                    <td>{{condicion.txt}}</td>
-                                    
-                                </tr>
-                            </tbody>
-                            <label><b>Total: {{totalPoints}} pts</b></label>
-                        </table>
-                    </div> 
-                </div>
-            </div> -->
+            
         </div>
         
         <div class="col-lg-12">
@@ -177,7 +144,10 @@ export default {
                             component.content = data.respuesta;
                             component.instruccion = data.content;
                             component.rubrica = data.rubrica ? JSON.parse(data.rubrica) : []
-                            
+                            // JSON.parse(data.rubrica).forEach(rubro => {
+                            //     // console.log(rubro);
+                            //     rubo.push({pts:rubro.pts,txt:rubro.txt});
+                            // });
                                                           
                         },
                         complete:()=>{
@@ -185,6 +155,7 @@ export default {
                         }
                          
                   });
+                // this.instruccion = component.content;
                 
             },
             patchEjercicio: function(){
@@ -198,7 +169,10 @@ export default {
                         url: 'http://localhost:3000/ejercicio/1',
                         data: {
                             // op: "replace",
-                            respuesta: component.content,                            
+                            respuesta: component.content,
+                            rubrica: JSON.stringify(component.rubrica),
+                            
+                            
                         },
 
                         success: function (data) {
@@ -214,7 +188,21 @@ export default {
                   });
             }
       },
-          
+      computed:{
+        totalPoints: function(){
+            if(this.rubrica.length > 0){
+                var total = 0
+                this.rubrica.forEach(ele => {
+                    total+= ele.value ?  parseInt( ele.pts) : 0
+                });
+                    return total
+            }
+
+            return 0;
+        }
+      },
+
+      
 
       created: async function () {
             // this.getEjercicio();

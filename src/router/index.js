@@ -44,6 +44,10 @@ export default new Router({
       {
         path: '/studentView',
         component: require('../views/student.vue').default
+      },
+      {
+        path: '/asistantView',
+        component: require('../views/asistente.vue').default
       }]
     }
   ]

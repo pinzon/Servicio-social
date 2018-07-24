@@ -28,7 +28,7 @@
           <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
         </div>
         <div class="col-lg-6">
-          <rubrica v-if="ajaxFinished" v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>
+          <rubrica v-if="ajaxFinished" type="teacher"  v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>
         </div>
         <div class="col-lg-12">
          

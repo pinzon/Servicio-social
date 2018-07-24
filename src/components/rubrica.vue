@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="ibox-content">
-            <form class="form-horizontal">
+            <form v-if="type=='teacher'" class="form-horizontal">
               <div class="form-group">
                 <label class="col-lg-2 control-label">Condición</label>
 
@@ -58,10 +58,17 @@
             </thead>
             <tbody>
                 <tr v-for="(condicion,index) in content" v-bind:key="index">
-                      <td>{{index + 1}}.- </td>
+                      <td v-if="type=='teacher'" >{{index + 1}}.- </td>
+                      <td v-if="type=='student'">
+                          <i v-if="condicion.value" class="fa fa-check" aria-hidden="true"></i>
+                          <i v-else class="fa fa-times" aria-hidden="true"></i>
+                      </td>
+                      <td v-if="type=='asistant'">
+                        <input type="checkbox" v-model="condicion.value" v-bind:value="true">
+                      </td>
                       <td><b>{{condicion.pts}}pts</b></td>
                       <td>{{condicion.txt}}</td>
-                      <td class="fa fa-trash" @click="removeTest(index)"><i></i></td>
+                      <td v-if="type=='teacher'" class="fa fa-trash" @click="removeTest(index)"><i></i></td>
                 </tr>
             </tbody>
             <label><b>Total: {{totalPoints}} pts</b></label>
@@ -78,6 +85,10 @@ module.exports = {
     content:{
       type: Array,
       default: []
+    },
+    type:{
+      type: String,
+      default: 'teacher'
     }
   },
 
@@ -89,7 +100,7 @@ module.exports = {
   methods:{
       addTest :function (){
 
-        this.content.push({pts:this.inputValue,txt:this.inputText})
+        this.content.push({pts:this.inputValue,txt:this.inputText,value:false})
         this.inputValue =""
         this.inputText=""
 
@@ -103,10 +114,15 @@ module.exports = {
   },
   computed:{
     totalPoints: function(){
+      var component = this
         if(this.content.length > 0){
           total = 0
           this.content.forEach(element => {
-              total+= parseInt( element.pts)
+              if(component.type == 'teacher'){
+                total+= parseInt( element.pts)
+              }else{
+                 total+= element.value ?  parseInt( element.pts) : 0
+              }
           });
           return total
         }

@@ -57,6 +57,11 @@
     "icon" : "fa-address-book"
   },
   {
+    "name" : "Vista Asistente",
+    "path" : "/asistantView",
+    "icon" : "fa-address-book"
+  },
+  {
     "name" : "Segmentar Vista",
     "path" : "/segmentarView",
     "icon" : "fa-address-book"
