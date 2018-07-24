@@ -157,31 +157,6 @@ export default {
                   
             },
 
-            // getEjercicio: async function(){
-            //       // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
-            //       var component = this
-            //       // console.log($)
-            //       $.ajax({
-            //             dataType: "json",
-            //             url: 'http://localhost:3000/ejercicio?id=1',
-            //             success: function (data) {
-            //                   // console.log(JSON.parse(data));
-                              
-            //                   if(data[0] ){
-            //                         component.content = data[0].content ? data[0].content : ''
-            //                         component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
-            //                   }else{
-            //                         component.content =  ''
-            //                         component.rubrica = []
-            //                   }
-
-                              
-            //             },
-            //             complete:()=>{
-            //                   component.ajaxFinished = true
-            //             }
-            //       });
-            // },
             getEjer: function(){
 
 
@@ -193,6 +168,7 @@ export default {
                         url: 'http://localhost:3000/ejercicio/1',
                         success: function (data) {
                             
+                            component.content = data.respuesta;
                             component.instruccion = data.content;
                             JSON.parse(data.rubrica).forEach(rubro => {
                                 // console.log(rubro);

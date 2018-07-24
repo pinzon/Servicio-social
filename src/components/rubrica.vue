@@ -57,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(condicion,index) in objetivos" v-bind:key="index">
+                <tr v-for="(condicion,index) in content" v-bind:key="index">
                       <td>{{index + 1}}.- </td>
                       <td><b>{{condicion.pts}}pts</b></td>
                       <td>{{condicion.txt}}</td>
@@ -74,44 +74,38 @@
 </template>
 <script>
 module.exports = {
-  props:['content'],
+  props:{
+    content:{
+      type: Array,
+      default: []
+    }
+  },
 
   data:function(){return {
         inputValue: "",
         inputText: "",
-        objetivos:[],
   }},
-
-  watch:{
-        content:function () {
-          // console.log(content)
-            this.objetivos = this.content
-            // console.log('changed2')
-        }
-      },
 
   methods:{
       addTest :function (){
 
-        this.objetivos.push({pts:this.inputValue,txt:this.inputText})
+        this.content.push({pts:this.inputValue,txt:this.inputText})
         this.inputValue =""
         this.inputText=""
 
-        this.$emit('change', this.objetivos)
+        //this.$emit('change', this.content)
       },
 
       removeTest: function(index){
-        this.objetivos.splice(index, 1);
-
-
-        this.$emit('change', this.objetivos)
+        this.content.splice(index, 1);
+        //this.$emit('change', this.content)
       },
   },
   computed:{
     totalPoints: function(){
-        if(this.objetivos.length > 0){
+        if(this.content.length > 0){
           total = 0
-          this.objetivos.forEach(element => {
+          this.content.forEach(element => {
               total+= parseInt( element.pts)
           });
           return total

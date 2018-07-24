@@ -46,11 +46,11 @@
   </div>
 </template>
 
+
+
+
 <script>
-
-// import swal from '../../source_page/js/plugins/sweetalert/sweetalert.min.js'
 import swal from 'sweetalert';
-
 
 /* eslint-disable */
 export default {
@@ -104,9 +104,7 @@ export default {
             },
 
             getEjercicio: async function(){
-                  // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
                   var component = this
-                  // console.log($)
                   $.ajax({
                         dataType: "json",
                         url: 'http://localhost:3000/ejercicio?id=1',
@@ -129,8 +127,6 @@ export default {
                   });
             }
       },
-
-      
 
       created: async function () {
             this.getEjercicio();
