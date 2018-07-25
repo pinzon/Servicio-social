@@ -163,7 +163,7 @@ export default {
 
                 var component = this
                 // var rubo = []
-                  // console.log($)
+                  //console.log(component.content)
                   $.ajax({
                         type: "PATCH",
                         url: 'http://localhost:3000/ejercicio/1',

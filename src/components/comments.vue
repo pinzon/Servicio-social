@@ -79,8 +79,8 @@ export default {
                 //console.log(coomponent)
                 ed.on('change', function(e) {
                     // console.log(component)
-                    // console.log('the event object ', e);
-                    // console.log('the editor object ', ed);
+                    //console.log('the event object ', e.segment);
+                    //console.log('the editor object ', ed);
                     // console.log('the content ', ed.getContent());
                     component.$emit('change', ed.getContent())
                 });

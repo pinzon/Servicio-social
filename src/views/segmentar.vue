@@ -15,19 +15,19 @@
           </li>
         </ol>
       </div>
-      <!--
+      
       <div class="col-lg-2 p-md">
-        <button v-on:click="saveEx" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
+        <button v-on:click="patchEjercicio" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
             <span class="bold">Guardar</span>
         </button>
       </div>
-      -->
+      
     </div>
 
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
         <div class="col-lg-6">
-          <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
+          <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"  user="teacher"></tinymce>
         </div>
         <div class="col-lg-6">
           <!--
@@ -127,6 +127,35 @@ export default {
                         complete:()=>{
                               component.ajaxFinished = true
                         }
+                  });
+            },
+            patchEjercicio: function(){
+
+
+                var component = this
+                // var rubo = []
+                  console.log(component.content)
+                  $.ajax({
+                        type: "PATCH",
+                        url: 'http://localhost:3000/ejercicio/1',
+                        data: {
+                            // op: "replace",
+                            respuesta: component.content,
+                            rubrica: JSON.stringify(component.rubrica),
+                            
+                            
+                        },
+
+                        success: function (data) {
+                            // console.log(data);
+                            swal("Guardado!", "Ejercicio guardado correctamente!", "success");
+                                                          
+                        },
+                        complete:()=>{
+                            console.log('Post completado');
+                            
+                        }
+                         
                   });
             }
       },
