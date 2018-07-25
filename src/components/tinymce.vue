@@ -38,10 +38,24 @@ require('tinymce/plugins/colorpicker')
 require('tinymce/plugins/textpattern')
 require('tinymce/plugins/help')
 
-
+//Comments
+require('../assets/js/tma_annotate/plugin.min.js');
 
 export default {
-    props: ['content'],
+    props: {
+        content:{
+            type: String,
+            default: ''
+        },
+        readonly:{
+            type: Boolean,
+            default: false
+        },
+        user:{
+            type: String,
+            default: 'teacher'
+        }
+    },
 
     data:function(){return {
         editor : {}
@@ -52,11 +66,41 @@ export default {
         
         tinyMCE.baseURL = '/static/'
 
+        var plugins,toolbar,menubar
+
+        switch (this.user) {
+            case 'teacher':
+                
+                plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help'
+                toolbar= 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+                menubar = true
+                break;
+
+            case 'student':
+                
+                plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help'
+                toolbar= 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+                menubar = true
+                break;
+            
+            
+            case 'asistant':
+                
+                plugins = 'tma_annotate'
+                toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide '
+                menubar = false
+                break;
+        
+            
+        }
+
+
         this.editor = tinymce.init({
             target: component.$refs.editor,
             height: 500,
-            plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help',
-            toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+            menubar:menubar,
+            plugins: plugins,
+            toolbar1: toolbar,
             image_advtab: true,
             codesample_content_css: 'skins/prism.css',
             init_instance_callback : component.initEditor,
@@ -70,8 +114,16 @@ export default {
                     // console.log('the content ', ed.getContent());
                     component.$emit('change', ed.getContent())
                 });
+
+
+                
             }
         });
+
+        if (this.readonly){
+             tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+        }
+
     },
 
     methods:{

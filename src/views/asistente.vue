@@ -45,7 +45,7 @@
                     <span v-html="instruccion"></span>
                     <div class="row ibox-content">
                         <!-- <button v-on:click="patchEjercicio">Prueba</button><br> -->
-                        <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
+                        <tinymce id="textEditor"  v-if="ajaxFinished"  v-bind:readonly="true" user="asistant"  v-bind:content="content" v-on:change="textEdited" ></tinymce>
                     </div>
                 </div>
             </div>

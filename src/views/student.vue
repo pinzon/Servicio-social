@@ -132,37 +132,6 @@ export default {
                   this.content = text
             },
 
-            // rubricaEdited: function (text) {
-            //       console.log(text)
-            //       this.rubrica = text
-            // },
-
-            // saveEx : function() {
-            //       var component = this
-            //       // console.log("deleting data")
-            //       //delete previous exercise
-            //       $.ajax({
-            //             type: 'DELETE',
-            //             url: 'http://localhost:3000/ejercicio/1',
-            //             complete: function (data) {
-            //                   $.ajax({
-            //                         type: 'POST',
-            //                         url: 'http://localhost:3000/ejercicio',
-            //                         data: {
-            //                               id:1, 
-            //                               content: component.content,
-            //                               rubrica: JSON.stringify(component.rubrica)
-            //                               },
-            //                         success: function (data) {
-            //                               // console.log('data posted'); 
-            //                               swal("Guardado!", "Ejercicio guardado correctamente!", "success");     
-            //                         }
-            //                   });
-            //             }
-            //       });
-                  
-            // },
-
             getEjer: function(){
 
 
