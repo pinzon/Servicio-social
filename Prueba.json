@@ -3,8 +3,8 @@
     {
       "id": "1",
       "content": "<!DOCTYPE html>\n<html>\n<head>\n</head>\n<body>\n<p>Test de ejercicio</p>\n</body>\n</html>",
-      "rubrica": "[{\"pts\":\"1\",\"txt\":\"Test de true\",\"value\":true},{\"pts\":\"1\",\"txt\":\"test de false\",\"value\":false}]",
-      "respuesta": "<p>&nbsp;</p>\n<p>test de <span class=\"annotation\" style=\"background-color: #f0e465;\" title=\"test\" data-id=\"9828\" data-author=\"Autor\">calificacion</span></p>"
+      "rubrica": "[{\"pts\":\"1\",\"txt\":\"Test de true\",\"value\":true}]",
+      "respuesta": "<p>&nbsp;</p>\n<p>test de tarea</p>"
     }
   ]
 }
