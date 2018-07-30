@@ -29,20 +29,29 @@
         <div class="col-lg-6">
           <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"  user="teacher"></tinymce>
         </div>
-        <div class="col-lg-6">
-          <!--
-          <rubrica v-if="ajaxFinished" v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>-->
-        </div>
-        <div class="col-lg-12">
-         
-        </div>
-        <div class="col-lg-12">
-         
-        </div>
-      </div>
+        <!--
+        <div class="col-lg-6 bg-white" >
+            <div v-for="value in preview" v-html="value">
+              {{ value }}
+            </div>
+        </div> -->
 
-      <div class="row">
-        
+        <div class="col-lg-6 bg-white" >
+
+          <div class="ibox float-e-margins">
+              <div class="ibox-title">
+                <h5>Vista Previa</h5>
+              </div>
+
+              <div class="ibox-content">
+                <div v-for="value in preview" v-html="value">
+                  {{ value }}
+                </div>
+              </div>
+          </div>
+
+        </div>
+
       </div>
 
     </div>
@@ -60,6 +69,7 @@ export default {
       data(){
             return {
                   content:'static',
+                  preview: [],
                   rubrica: [],
                   ajaxFinished: false,
             }
@@ -73,6 +83,7 @@ export default {
       methods:{
             textEdited: function (text) {
                   this.content = text
+                  this.preview.push(text)
             },
 
             rubricaEdited: function (text) {
