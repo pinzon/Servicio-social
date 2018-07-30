@@ -50,6 +50,8 @@
               </div>
           </div>
 
+          <input id="btn2" type="button" value="Subtract" />
+
         </div>
 
       </div>
@@ -176,6 +178,13 @@ export default {
       }
             
 }
+
+$(function() {
+    $('#btn2').click(function() { console.log("saddasd") });
+});
+
 </script>
+
+
 <style scoped>
 </style>
