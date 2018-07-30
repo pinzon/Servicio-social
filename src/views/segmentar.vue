@@ -35,10 +35,8 @@
               <div class="ibox-title">
                 <h5>Vista Previa</h5>
               </div>
-
               <div class="ibox-content">
-                <div v-html="content">
-                </div>
+                <div v-html="content"></div>
               </div>
 
               <div class="ibox-content">
@@ -48,15 +46,8 @@
               </div>
           </div>
 
-            <!--<input id="btn2" type="button" value="Subtract" />   -->
-
-
-            
-
         </div>
-
       </div>
-
     </div>
   </div>
 </template>

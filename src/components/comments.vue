@@ -88,7 +88,7 @@ export default {
 
         });
 
-        tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+        //tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
 
     },
      methods:{
