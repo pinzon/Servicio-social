@@ -29,13 +29,6 @@
         <div class="col-lg-6">
           <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"  user="teacher"></tinymce>
         </div>
-        <!--
-        <div class="col-lg-6 bg-white" >
-            <div v-for="value in preview" v-html="value">
-              {{ value }}
-            </div>
-        </div> -->
-
         <div class="col-lg-6 bg-white" >
 
           <div class="ibox float-e-margins">
@@ -44,8 +37,15 @@
               </div>
 
               <div class="ibox-content">
-                <div v-for="value in preview" v-html="value">
-                  {{ value }}
+                <div v-html="content">
+                </div>
+              </div>
+
+              <div class="ibox-content">
+                <div class="text-center" v-for="btn in buttons" >
+                  <div class="col" v-html="btn.tag">
+                    {{ btn.tag }}
+                  </div>
                 </div>
               </div>
           </div>
@@ -71,6 +71,7 @@ export default {
                   content:'static',
                   preview: [],
                   rubrica: [],
+                  buttons: [],
                   ajaxFinished: false,
             }
       },
@@ -81,14 +82,11 @@ export default {
             },
 
       methods:{
-            textEdited: function (text) {
+            textEdited: function (text,id,name) {
+                  //console.log(id+name)
                   this.content = text
                   this.preview.push(text)
-            },
-
-            rubricaEdited: function (text) {
-                  console.log(text)
-                  this.rubrica = text
+                  this.buttons.push({id: id,tag:"<button type='submit' id='"+id+"' class='btn rounded-2 font-size-19 mb-5 px-5'>"+name+"</button>"})
             },
 
             saveEx : function() {
