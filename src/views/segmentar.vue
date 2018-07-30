@@ -42,15 +42,16 @@
               </div>
 
               <div class="ibox-content">
-                <div class="text-center" v-for="btn in buttons" >
-                  <div class="col" v-html="btn.tag">
-                    {{ btn.tag }}
-                  </div>
+                <div class="text-center"  >
+                  <button class="btn rounded-2 font-size-19 mb-5 px-5" v-for='btn in buttons' v-on:click='animatedDiv(btn.id,btn.ann,btn.color)' > {{btn.text}} </button>
                 </div>
               </div>
           </div>
 
-          <input id="btn2" type="button" value="Subtract" />
+            <!--<input id="btn2" type="button" value="Subtract" />   -->
+
+
+            
 
         </div>
 
@@ -71,7 +72,6 @@ export default {
       data(){
             return {
                   content:'static',
-                  preview: [],
                   rubrica: [],
                   buttons: [],
                   ajaxFinished: false,
@@ -84,11 +84,32 @@ export default {
             },
 
       methods:{
-            textEdited: function (text,id,name) {
-                  //console.log(id+name)
+            textEdited: function (text,id,name,anim,color) {
                   this.content = text
-                  this.preview.push(text)
-                  this.buttons.push({id: id,tag:"<button type='submit' id='"+id+"' class='btn rounded-2 font-size-19 mb-5 px-5'>"+name+"</button>"})
+                  this.buttons.push({id: id,text:name, ann:anim, color:color})
+            },
+            animatedDiv: function (id,animation, color){
+              if (animation=='subrayar'){
+                //console.log('subrayar'+id+animation+color);
+                var atr = "background-position";
+
+                 $('span#'+id).css({
+                    "background-image": "linear-gradient(to right, #ffffff 50%," + color +" 50%)",
+                    'background-position': '-100%',
+
+                });
+
+                setTimeout(function(){
+                  $('span#'+id).css(atr, 0);
+                }, 3000);
+
+              }else if (animation=='underline'){
+                console.log('underline');
+              }else {
+                $('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                    $(this).removeClass();
+                });
+              }
             },
 
             saveEx : function() {
@@ -169,22 +190,11 @@ export default {
                          
                   });
             }
-      },
-
-      
-
+      }, 
       created: async function () {
             this.getEjercicio();
-      }
-            
+      }          
 }
-
-$(function() {
-    $('#btn2').click(function() { console.log("saddasd") });
-});
-
 </script>
-
-
 <style scoped>
 </style>

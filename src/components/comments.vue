@@ -81,7 +81,7 @@ export default {
                     //console.log(e.id)
                     //console.log('the event object ', e);
                     //console.log('the editor object ', ed);
-                    component.$emit('change', ed.getContent(), e.id , e.dataAnnotation)
+                    component.$emit('change', ed.getContent(), e.id , e.dataAnnotation , e.anim, e.color)
                 });
 
             }
