@@ -45,16 +45,23 @@
                     <span v-html="instruccion"></span>
                     <div class="row ibox-content">
                         <!-- <button v-on:click="patchEjercicio">Prueba</button><br> -->
-                        <tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
+                        <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica>
+                        <!-- <tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce> -->
                     </div>
                 </div>
             </div>
 
         </div>
-
-        <div class="col-lg-6">
-          <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica>
+        
             
+
+        
+        <div class="col-lg-6" >
+            <!-- <div class="lol">LOL</div> -->
+        <!-- <div class="lol"> -->
+          <!-- <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica> -->
+            <tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
+        <!-- </div>     -->
             <!-- <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Rubrica</h5>
@@ -193,4 +200,13 @@ export default {
 }
 </script>
 <style scoped>
+    .lol{
+        position: fixed;
+        width: 800px;
+        /* right: 10px; */
+    }
+    .collapse-link{
+        display: none;
+        
+    }
 </style>
