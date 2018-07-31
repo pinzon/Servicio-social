@@ -83,24 +83,38 @@ export default {
               if (animation=='subrayar'){
                 //console.log('subrayar'+id+animation+color);
                 var atr = "background-position";
+                val = 0;
 
                  $('span#'+id).css({
+                   "background-position": "0",
+                   "background-size": "200%", 
+                   "transition": "all 0.4s", 
                     "background-image": "linear-gradient(to right, #ffffff 50%," + color +" 50%)",
                     'background-position': '-100%',
 
                 });
 
-                setTimeout(function(){
-                  $('span#'+id).css(atr, 0);
-                }, 3000);
+                
 
               }else if (animation=='underline'){
-                console.log('underline');
-              }else {
+                var atr = "text-decoration";
+                var val = '';
+                $('span#'+id).css({
+                    "text-decoration":"underline",
+                });
+ }
+                setTimeout(function(){
+                  $('span#'+id).css(atr, val);
+                }, 3000);
+                
+             
                 $('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                     $(this).removeClass();
                 });
-              }
+
+              // setTimeout(function(){
+              //     $('span#'+id).css(atr, val);
+              //   }, 3000);
             },
 
             saveEx : function() {
