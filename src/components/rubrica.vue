@@ -18,13 +18,20 @@
                   <a href="#">Config option 2</a>
                 </li>
               </ul>
-              <a class="close-link">
+              <a class="close-link">3
                 <i class="fa fa-times"></i>
               </a>
             </div>
           </div>
           <div class="ibox-content">
-            <form v-if="type=='teacher'" class="form-horizontal">
+            <form v-if="type=='teacher'" class="form-horizontal" @button="checkForm">
+              <!-- <p v-if="errors.length">
+                <b>Please correct the following error(s):</b>
+                <ul>
+                  <li v-for="error in errors" :key="error">{{ error }}</li>
+                </ul>
+              </p> -->
+              <!-- <p v-else>Todo biem</p> -->
               <div class="form-group">
                 <label class="col-lg-2 control-label">Condición</label>
 
@@ -36,19 +43,25 @@
                 <label class="col-lg-2 control-label">Puntos</label>
 
                 <div class="col-lg-2">
-                  <input type="number" min="1" v-model="inputValue" placeholder="pts" class="form-control">
+                  <input type="number" min="1" v-model.number="inputValue" placeholder="pts" class="form-control">
                 </div>
               </div>
               
               <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
-                  <button class="btn btn-sm btn-white" type="button" @click="addTest" >Agregar</button>
+                  <button class="btn btn-sm btn-white" type="button" @click="checkForm" >Agregar</button>
                 </div>
               </div>
+              <p v-if="errors.length">
+                <b>Por favor corregir error(es):</b>
+                <ul>
+                  <li v-for="error in errors" :key="error">{{ error }}</li>
+                </ul>
+              </p>
             </form>
 
             <div class="row ibox-content">
-        <table class="col-8">
+        <table class="col-8 table table-striped">
             <thead>
                 <tr>
                     <th>#</th>
@@ -93,6 +106,7 @@ module.exports = {
   },
 
   data:function(){return {
+        errors: [],
         inputValue: "",
         inputText: "",
   }},
@@ -111,6 +125,26 @@ module.exports = {
         this.content.splice(index, 1);
         //this.$emit('change', this.content)
       },
+      checkForm: function (e) {
+      this.errors = [];
+
+      if (!this.inputText) {
+        this.errors.push("Descripcion requerida.");
+      }
+      if (!this.inputValue) {
+        this.errors.push('Puntuacion requerida.');
+      }
+
+      if (!this.errors.length) {
+        this.content.push({pts:this.inputValue,txt:this.inputText,value:false})
+        this.inputValue =""
+        this.inputText=""
+        return true;
+        
+      }
+
+      e.preventDefault();
+    }
   },
   computed:{
     totalPoints: function(){
@@ -138,4 +172,46 @@ module.exports = {
 td,th{
   min-width: 100px;
 }
+
+/* .ibox.fullscreen .collapse-link{
+  display: none;
+}
+
+.table-bordered {
+  border: 1px solid #EBEBEB;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > thead > tr > td {
+  background-color: #F5F5F6;
+  border-bottom-width: 1px;
+}
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > tfoot > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td,
+.table-bordered > tfoot > tr > td {
+  border: 1px solid #e7e7e7;
+} */
+.table > thead > tr > th {
+  border-bottom: 1px solid #DDDDDD;
+  vertical-align: bottom;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  border-top: 1px solid #e7eaec;
+  line-height: 1.42857;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+
 </style>
