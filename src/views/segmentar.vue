@@ -27,7 +27,7 @@
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
         <div class="col-lg-6">
-          <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"  user="teacher"></tinymce>
+          <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:textedited="textEdited"  user="teacher"></tinymce>
         </div>
         <div class="col-lg-6 bg-white" >
 
@@ -83,8 +83,6 @@ export default {
               if (animation=='subrayar'){
                 //console.log('subrayar'+id+animation+color);
                 var atr = "background-position";
-                val = 0;
-
                  $('span#'+id).css({
                    "background-position": "0",
                    "background-size": "200%", 
@@ -93,16 +91,13 @@ export default {
                     'background-position': '-100%',
 
                 });
-
-                
-
               }else if (animation=='underline'){
                 var atr = "text-decoration";
                 var val = '';
                 $('span#'+id).css({
                     "text-decoration":"underline",
                 });
- }
+              }
                 setTimeout(function(){
                   $('span#'+id).css(atr, val);
                 }, 3000);
@@ -111,10 +106,6 @@ export default {
                 $('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                     $(this).removeClass();
                 });
-
-              // setTimeout(function(){
-              //     $('span#'+id).css(atr, val);
-              //   }, 3000);
             },
 
             saveEx : function() {

@@ -75,21 +75,14 @@ export default {
             codesample_content_css: 'skins/prism.css',
              init_instance_callback : component.initEditor,
             setup:function(ed) {
-                //comments = ed.getContent();
-                //console.log(coomponent)
-                ed.on('change', function(e) {
-                    //console.log(e.id)
+                ed.on('submitcomment', function(e) {
                     //console.log('the event object ', e);
                     //console.log('the editor object ', ed);
-                    component.$emit('change', ed.getContent(), e.id , e.dataAnnotation , e.anim, e.color)
+                    component.$emit('textedited', ed.getContent(), e.id , e.dataAnnotation , e.anim, e.color)
                 });
-
             }
-
         });
-
         //tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
-
     },
      methods:{
         initEditor:function(editor) {
