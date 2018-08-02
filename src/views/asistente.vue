@@ -112,11 +112,11 @@ export default {
             //       //delete previous exercise
             //       $.ajax({
             //             type: 'DELETE',
-            //             url: 'http://localhost:3000/ejercicio/1',
+            //             url: 'http://142.93.52.192:3000/ejercicio/1',
             //             complete: function (data) {
             //                   $.ajax({
             //                         type: 'POST',
-            //                         url: 'http://localhost:3000/ejercicio',
+            //                         url: 'http://142.93.52.192:3000/ejercicio',
             //                         data: {
             //                               id:1, 
             //                               content: component.content,
@@ -140,7 +140,7 @@ export default {
                   // console.log($)
                   $.ajax({
                         type: "GET",
-                        url: 'http://localhost:3000/ejercicio/1',
+                        url: 'http://142.93.52.192:3000/ejercicio/1',
                         success: function (data) {
                             
                             component.content = data.respuesta;
@@ -168,7 +168,7 @@ export default {
                   //console.log(component.content)
                   $.ajax({
                         type: "PATCH",
-                        url: 'http://localhost:3000/ejercicio/1',
+                        url: 'http://142.93.52.192:3000/ejercicio/1',
                         data: {
                             // op: "replace",
                             respuesta: component.content,
