@@ -84,10 +84,12 @@ export default {
                   $.ajax({
                         type: 'DELETE',
                         url: 'http://142.93.52.192:3000/ejercicio/1',
+                        crossDomain: true,
                         complete: function (data) {
                               $.ajax({
                                     type: 'POST',
                                     url: 'http://142.93.52.192:3000/ejercicio',
+                                    crossDomain: true,
                                     data: {
                                           id:1, 
                                           content: component.content,
@@ -108,6 +110,7 @@ export default {
                   $.ajax({
                         dataType: "json",
                         url: 'http://142.93.52.192:3000/ejercicio?id=1',
+                        crossDomain: true,
                         success: function (data) {
                               // console.log(JSON.parse(data));
                               

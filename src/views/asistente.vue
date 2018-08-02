@@ -113,10 +113,12 @@ export default {
             //       $.ajax({
             //             type: 'DELETE',
             //             url: 'http://142.93.52.192:3000/ejercicio/1',
+            //crossDomain: true,
             //             complete: function (data) {
             //                   $.ajax({
             //                         type: 'POST',
             //                         url: 'http://142.93.52.192:3000/ejercicio',
+            //crossDomain: true,
             //                         data: {
             //                               id:1, 
             //                               content: component.content,
@@ -141,6 +143,7 @@ export default {
                   $.ajax({
                         type: "GET",
                         url: 'http://142.93.52.192:3000/ejercicio/1',
+                        crossDomain: true,
                         success: function (data) {
                             
                             component.content = data.respuesta;
@@ -169,6 +172,7 @@ export default {
                   $.ajax({
                         type: "PATCH",
                         url: 'http://142.93.52.192:3000/ejercicio/1',
+                        crossDomain: true,
                         data: {
                             // op: "replace",
                             respuesta: component.content,
