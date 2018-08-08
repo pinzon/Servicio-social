@@ -67,21 +67,25 @@
                     <th>#</th>
                     <th>Puntos</th>
                     <th>Condición</th>
+                    <th  v-if="type=='student' || type=='asistant' " >Comentario</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(condicion,index) in content" v-bind:key="index">
                       <td v-if="type=='teacher'" >{{index + 1}}.- </td>
                       <td v-if="type=='student'">
-                          <i v-if="condicion.value" class="fa fa-check" aria-hidden="true"></i>
-                          <i v-else class="fa fa-times" aria-hidden="true"></i>
+                          <span>{{condicion.value}}</span>
                       </td>
                       <td v-if="type=='asistant'">
-                        <input type="checkbox" v-model="condicion.value" v-bind:value="true">
+                        <input type="number" v-model="condicion.value" min="0" :max='condicion.pts'>
                       </td>
                       <td><b>{{condicion.pts}}pts</b></td>
                       <td>{{condicion.txt}}</td>
                       <td v-if="type=='teacher'" class="fa fa-trash" @click="removeTest(index)"><i></i></td>
+                      <td v-if="type=='student' || type=='asistant' ">
+                        <input v-if="type=='asistant'" type="text" v-model="condicion.comment">
+                        <span v-if="type=='student'">{{condicion.comment}}</span>
+                      </td>
                 </tr>
             </tbody>
             <label><b>Total: {{totalPoints}} pts</b></label>
@@ -112,19 +116,20 @@ module.exports = {
   }},
 
   methods:{
-      addTest :function (){
+      // addTest :function (){
 
-        this.content.push({pts:this.inputValue,txt:this.inputText,value:false})
-        this.inputValue =""
-        this.inputText=""
+      //   this.content.push({pts:this.inputValue,txt:this.inputText,value:0 , comments: ''})
+      //   this.inputValue =""
+      //   this.inputText=""
 
-        //this.$emit('change', this.content)
-      },
+      //   //this.$emit('change', this.content)
+      // },
 
       removeTest: function(index){
         this.content.splice(index, 1);
         //this.$emit('change', this.content)
       },
+
       checkForm: function (e) {
       this.errors = [];
 
@@ -136,7 +141,7 @@ module.exports = {
       }
 
       if (!this.errors.length) {
-        this.content.push({pts:this.inputValue,txt:this.inputText,value:false})
+        this.content.push({pts:this.inputValue,txt:this.inputText,value:0, comment: ''})
         this.inputValue =""
         this.inputText=""
         return true;
@@ -155,7 +160,7 @@ module.exports = {
               if(component.type == 'teacher'){
                 total+= parseInt( element.pts)
               }else{
-                 total+= element.value ?  parseInt( element.pts) : 0
+                 total+= element.value ?  parseInt( element.value) : 0
               }
           });
           return total
