@@ -25,21 +25,23 @@
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
         <div class="col-lg-6">
+          <h3>Redacta el ejercicio </h3>
           <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
         </div>
         <div class="col-lg-6">
+          <h3>Escribe los parametros con los que se calificará la respuesta </h3>
           <rubrica v-if="ajaxFinished" type="teacher"  v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>
         </div>
         <div class="col-lg-12">
-         
+
         </div>
         <div class="col-lg-12">
-         
+
         </div>
       </div>
 
       <div class="row">
-        
+
       </div>
 
     </div>
@@ -91,18 +93,18 @@ export default {
                                     url: 'http://142.93.52.192:3000/ejercicio',
                                     crossDomain: true,
                                     data: {
-                                          id:1, 
+                                          id:1,
                                           content: component.content,
                                           rubrica: JSON.stringify(component.rubrica)
                                           },
                                     success: function (data) {
-                                          // console.log('data posted'); 
-                                          swal("Guardado!", "Ejercicio guardado correctamente!", "success");     
+                                          // console.log('data posted');
+                                          swal("Guardado!", "Ejercicio guardado correctamente!", "success");
                                     }
                               });
                         }
                   });
-                  
+
             },
 
             getEjercicio: async function(){
@@ -113,7 +115,7 @@ export default {
                         crossDomain: true,
                         success: function (data) {
                               // console.log(JSON.parse(data));
-                              
+
                               if(data[0] ){
                                     component.content = data[0].content ? data[0].content : ''
                                     component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
@@ -122,7 +124,7 @@ export default {
                                     component.rubrica = []
                               }
 
-                              
+
                         },
                         complete:()=>{
                               component.ajaxFinished = true
@@ -134,7 +136,7 @@ export default {
       created: async function () {
             this.getEjercicio();
       }
-            
+
 }
 </script>
 <style scoped>

@@ -26,17 +26,17 @@
         <!-- <div class="col-lg-12">
             <span v-html="instruccion"></span>
 
-            
+
             <button v-on:click="getEjer">Prueba</button>
         </div> -->
       <div class="row">
         <div class="col-lg-6">
             <!-- <span v-html="instruccion"></span>
 
-            
+
             <button v-on:click="getEjer">Prueba</button> -->
           <!-- <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce> -->
-        
+
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Tarea</h5>
@@ -52,14 +52,15 @@
             </div>
 
         </div>
-        
-            
 
-        
+
+
+
         <div class="col-lg-6" >
             <!-- <div class="lol">LOL</div> -->
         <!-- <div class="lol"> -->
           <!-- <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica> -->
+            <h3>Redacta tu respuesta</h3>
             <tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
         <!-- </div>     -->
             <!-- <div class="ibox float-e-margins">
@@ -67,8 +68,8 @@
                     <h5>Rubrica</h5>
                 </div>
                 <div class="ibox-content">
-                    
-                   <div class="row ibox-content"> 
+
+                   <div class="row ibox-content">
                         <table >
                             <thead>
                                 <tr>
@@ -82,29 +83,29 @@
                                     <td>
                                         <i v-if="condicion.value" class="fa fa-check" aria-hidden="true"></i>
                                         <i v-else class="fa fa-times" aria-hidden="true"></i>
-                                    
+
                                     </td>
 
                                     <td>{{index + 1}}.- </td>
                                     <td><b>{{condicion.pts}}pts</b></td>
                                     <td>{{condicion.txt}}</td>
-                                    
+
                                 </tr>
                             </tbody>
                             <label><b>Total: {{totalPoints}} pts</b></label>
                         </table>
-                    </div> 
+                    </div>
                 </div>
             </div> -->
         </div>
-        
+
         <div class="col-lg-12">
-         
+
         </div>
       </div>
 
       <div class="row">
-        
+
       </div>
 
     </div>
@@ -150,19 +151,19 @@ export default {
                         url: 'http://142.93.52.192:3000/ejercicio/1',
                         crossDomain: true,
                         success: function (data) {
-                            
+
                             component.content = data.respuesta;
                             component.instruccion = data.content;
                             component.rubrica = data.rubrica ? JSON.parse(data.rubrica) : []
-                            
-                                                          
+
+
                         },
                         complete:()=>{
                               component.ajaxFinished = true
                         }
-                         
+
                   });
-                
+
             },
             patchEjercicio: function(){
 
@@ -176,29 +177,29 @@ export default {
                         crossDomain: true,
                         data: {
                             // op: "replace",
-                            respuesta: component.content,                            
+                            respuesta: component.content,
                         },
 
                         success: function (data) {
                             // console.log(data);
                             swal("Guardado!", "Ejercicio guardado correctamente!", "success");
-                                                          
+
                         },
                         complete:()=>{
                             console.log('Post completado');
-                            
+
                         }
-                         
+
                   });
             }
       },
-          
+
 
       created: async function () {
             // this.getEjercicio();
             this.getEjer();
       }
-            
+
 }
 </script>
 <style scoped>
@@ -209,6 +210,6 @@ export default {
     }
     .collapse-link{
         display: none;
-        
+
     }
 </style>

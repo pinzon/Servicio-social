@@ -26,17 +26,17 @@
         <!-- <div class="col-lg-12">
             <span v-html="instruccion"></span>
 
-            
+
             <button v-on:click="getEjer">Prueba</button>
         </div> -->
       <div class="row">
         <div class="col-lg-6">
             <!-- <span v-html="instruccion"></span>
 
-            
+
             <button v-on:click="getEjer">Prueba</button> -->
           <!-- <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce> -->
-        
+
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Tarea</h5>
@@ -44,6 +44,7 @@
                 <div class="ibox-content">
                     <span v-html="instruccion"></span>
                     <div class="row ibox-content">
+                        <h3>Califica el trabajo utilizando la rúbrica</h3>
                         <!-- <button v-on:click="patchEjercicio">Prueba</button><br> -->
                         <!-- <tinymce id="textEditor"  v-if="ajaxFinished"  v-bind:readonly="true" user="asistant"  v-bind:content="content" v-on:change="textEdited" ></tinymce> -->
                         <rubrica v-if="ajaxFinished" type="asistant" v-bind:content="rubrica"  ></rubrica>
@@ -55,18 +56,19 @@
 
         <div class="col-lg-6">
           <!-- <rubrica v-if="ajaxFinished" type="asistant" v-bind:content="rubrica"  ></rubrica> -->
+          <h3>Comenta el trabajo del estudiante para una mejor retroalimentación</h3>
           <tinymce id="textEditor"  v-if="ajaxFinished"  v-bind:readonly="true" user="asistant"  v-bind:content="content" v-on:change="textEdited" ></tinymce>
-            
-            
+
+
         </div>
-        
+
         <div class="col-lg-12">
-         
+
         </div>
       </div>
 
       <div class="row">
-        
+
       </div>
 
     </div>
@@ -120,18 +122,18 @@ export default {
             //                         url: 'http://142.93.52.192:3000/ejercicio',
             //crossDomain: true,
             //                         data: {
-            //                               id:1, 
+            //                               id:1,
             //                               content: component.content,
             //                               rubrica: JSON.stringify(component.rubrica)
             //                               },
             //                         success: function (data) {
-            //                               // console.log('data posted'); 
-            //                               swal("Guardado!", "Ejercicio guardado correctamente!", "success");     
+            //                               // console.log('data posted');
+            //                               swal("Guardado!", "Ejercicio guardado correctamente!", "success");
             //                         }
             //                   });
             //             }
             //       });
-                  
+
             // },
 
             getEjer: function(){
@@ -145,7 +147,7 @@ export default {
                         url: 'http://142.93.52.192:3000/ejercicio/1',
                         crossDomain: true,
                         success: function (data) {
-                            
+
                             component.content = data.respuesta;
                             component.instruccion = data.content;
                             component.rubrica = data.rubrica ? JSON.parse(data.rubrica) : []
@@ -153,15 +155,15 @@ export default {
                             //     // console.log(rubro);
                             //     rubo.push({pts:rubro.pts,txt:rubro.txt});
                             // });
-                                                          
+
                         },
                         complete:()=>{
                               component.ajaxFinished = true
                         }
-                         
+
                   });
                 // this.instruccion = component.content;
-                
+
             },
             patchEjercicio: function(){
 
@@ -177,20 +179,20 @@ export default {
                             // op: "replace",
                             respuesta: component.content,
                             rubrica: JSON.stringify(component.rubrica),
-                            
-                            
+
+
                         },
 
                         success: function (data) {
                             // console.log(data);
                             swal("Guardado!", "Ejercicio guardado correctamente!", "success");
-                                                          
+
                         },
                         complete:()=>{
                             console.log('Post completado');
-                            
+
                         }
-                         
+
                   });
             }
       },
@@ -208,13 +210,13 @@ export default {
         }
       },
 
-      
+
 
       created: async function () {
             // this.getEjercicio();
             this.getEjer();
       }
-            
+
 }
 </script>
 <style scoped>
