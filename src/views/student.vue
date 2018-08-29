@@ -148,7 +148,7 @@ export default {
                   // console.log($)
                   $.ajax({
                         type: "GET",
-                        url: 'http://142.93.52.192:3000/ejercicio/1',
+                        url: 'http://142.93.52.192:81/ejercicio?id=1',
                         crossDomain: true,
                         success: function (data) {
 
@@ -173,7 +173,7 @@ export default {
                   // console.log($)
                   $.ajax({
                         type: "PATCH",
-                        url: 'http://142.93.52.192:3000/ejercicio/1',
+                        url: 'http://142.93.52.192:81/ejercicio?id=1',
                         crossDomain: true,
                         data: {
                             // op: "replace",
