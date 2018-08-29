@@ -23,27 +23,47 @@
       </div>
       
     </div>
+    <!--                
+              div class="ibox-content">
+                <div v-html="content"></div>
+              </div>
+    -->
 
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
-        <div class="col-lg-6">
-          <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:textedited="textEdited"  user="teacher"></tinymce>
+
+        <div class="col-lg-7">
+          <ul class="nav nav-tabs " id="myTab" role="tablist">
+            <li class="nav-item bg-white">
+              <a class="nav-link active bg-white" id="editor-tab" data-toggle="tab" href="#editor" role="tab" aria-controls="editor" aria-selected="true">Editor</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="preview-tab" data-toggle="tab" href="#preview" role="tab" aria-controls="preview" aria-selected="false">Vista Previa</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane active" id="editor" role="tabpanel" aria-labelledby="editor-tab">
+              <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:textedited="textEdited"></tinymce>
+            </div>
+            <div class="tab-pane ibox-content" id="preview" role="tabpanel" aria-labelledby="preview-tab" v-html="content">
+
+            </div>
+          </div>
         </div>
-        <div class="col-lg-6 bg-white" >
 
+        <div class="col-lg-5 bg-white" >
           <div class="ibox float-e-margins">
-              <div class="ibox-title">
-                <h5>Vista Previa</h5>
-              </div>
-              <div class="ibox-content">
-                <div v-html="content"></div>
-              </div>
-
-              <div class="ibox-content">
-                <div class="text-center"  >
-                  <button class="btn rounded-2 font-size-19 mb-5 px-5" v-for='btn in buttons' v-on:click='animatedDiv(btn.id,btn.ann,btn.color)' > {{btn.text}} </button>
-                </div>
-              </div>
+            <div class="ibox-title">
+              <h5>Comentarios</h5>
+            </div>
+            <div class="ibox-content no-padding">
+              <ul class="list-group">
+                <li class="list-group-item" v-for='btn in buttons'>
+                  <span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span> 
+                  <p  style="padding-right: 15%">{{btn.text}}</p>
+                </li>
+              </ul>
+            </div>
           </div>
 
         </div>
@@ -63,21 +83,20 @@ export default {
       data(){
             return {
                   content:'static',
-                  rubrica: [],
+                  //rubrica: [],
                   buttons: [],
                   ajaxFinished: false,
             }
       },
 
       components:{
-            "tinymce" : require('../components/comments.vue').default,
-            "rubrica" : require('../components/rubrica.vue').default
+            "tinymce" : require('../components/comments.vue').default
             },
 
       methods:{
             textEdited: function (text,id,name,anim,color) {
                   this.content = text
-                  this.buttons.push({id: id,text:name, ann:anim, color:color})
+                  this.buttons.push({id: id, text:name, ann:anim, color:color})
             },
             animatedDiv: function (id,animation, color){
               if (animation=='subrayar'){
@@ -108,39 +127,13 @@ export default {
                 });
             },
 
-            saveEx : function() {
-                  var component = this
-                  $.ajax({
-                        type: 'DELETE',
-                        url: 'http://142.93.52.192:3000/ejercicio/1',
-                        crossDomain: true,
-                        complete: function (data) {
-                              $.ajax({
-                                    type: 'POST',
-                                    url: 'http://142.93.52.192:3000/ejercicio',
-                                    crossDomain: true,
-                                    data: {
-                                          id:1, 
-                                          content: component.content,
-                                          rubrica: JSON.stringify(component.rubrica)
-                                          },
-                                    success: function (data) {
-                                          // console.log('data posted'); 
-                                          swal("Guardado!", "Ejercicio guardado correctamente!", "success");     
-                                    }
-                              });
-                        }
-                  });
-                  
-            },
-
             getEjercicio: async function(){
                   // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
                   var component = this
                   // console.log($)
                   $.ajax({
                         dataType: "json",
-                        url: 'http://142.93.52.192:3000/ejercicio?id=1',
+                        url: 'http://142.93.52.192:81/ejercicio?id=1',
                         crossDomain: true,
                         success: function (data) {
                               // console.log(JSON.parse(data));
@@ -168,12 +161,12 @@ export default {
                   console.log(component.content)
                   $.ajax({
                         type: "PATCH",
-                        url: 'http://142.93.52.192:3000/ejercicio/1',
+                        url: 'http://142.93.52.192:81/ejercicio?id=1',
                         crossDomain: true,
                         data: {
                             // op: "replace",
                             respuesta: component.content,
-                            rubrica: JSON.stringify(component.rubrica),
+                            parts: JSON.stringify(component.buttons),
                             
                             
                         },
