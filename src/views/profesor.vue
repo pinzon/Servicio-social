@@ -83,25 +83,40 @@ export default {
                   var component = this
                   // console.log("deleting data")
                   //delete previous exercise
-                  $.ajax({
-                        type: 'DELETE',
-                        url: 'http://142.93.52.192:81/ejercicio?id=1',
+                  // $.ajax({
+                  //       type: 'DELETE',
+                  //       url: 'http://142.93.52.192:81/ejercicio?id=1',
+                  //       crossDomain: true,
+                  //       complete: function (data) {
+                  //             $.ajax({
+                  //                   type: 'POST',
+                  //                   url: 'http://142.93.52.192:81/ejercicio',
+                  //                   crossDomain: true,
+                  //                   data: {
+                  //                         id:1,
+                  //                         content: component.content,
+                  //                         rubrica: JSON.stringify(component.rubrica)
+                  //                         },
+                  //                   success: function (data) {
+                  //                         // console.log('data posted');
+                  //                         swal("Guardado!", "Ejercicio guardado correctamente!", "success");
+                  //                   }
+                  //             });
+                  //       }
+                  // });
+
+                   $.ajax({
+                        type: 'PATCH',
+                        url: 'http://142.93.52.192:81/ejercicio/1',
                         crossDomain: true,
-                        complete: function (data) {
-                              $.ajax({
-                                    type: 'POST',
-                                    url: 'http://142.93.52.192:81/ejercicio',
-                                    crossDomain: true,
-                                    data: {
-                                          id:1,
-                                          content: component.content,
-                                          rubrica: JSON.stringify(component.rubrica)
-                                          },
-                                    success: function (data) {
-                                          // console.log('data posted');
-                                          swal("Guardado!", "Ejercicio guardado correctamente!", "success");
-                                    }
-                              });
+                        data: {
+                              id:1,
+                              content: component.content,
+                              rubrica: JSON.stringify(component.rubrica)
+                              },
+                        success: function (data) {
+                              // console.log('data posted');
+                              swal("Guardado!", "Ejercicio guardado correctamente!", "success");
                         }
                   });
 

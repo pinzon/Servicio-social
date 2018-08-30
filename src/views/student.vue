@@ -139,7 +139,7 @@ export default {
                   // console.log($)
                   $.ajax({
                         type: "PATCH",
-                        url: 'http://142.93.52.192:81/ejercicio?id=1',
+                        url: 'http://142.93.52.192:81/ejercicio/1',
                         crossDomain: true,
                         data: {
                             // op: "replace",

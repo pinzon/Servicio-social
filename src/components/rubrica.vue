@@ -164,7 +164,7 @@ module.exports = {
               if(component.type == 'teacher'){
                 total+= parseInt( element.pts)
               }else{
-                 total+= element.value ?  parseInt( element.value) : 0
+                 total+= parseInt( element.value)
               }
           });
           return total
