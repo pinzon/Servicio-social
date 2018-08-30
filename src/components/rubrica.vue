@@ -40,13 +40,13 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-lg-2 control-label">Puntos</label>
+                <label class="col-lg-2 control-label">Porcentaje</label>
 
                 <div class="col-lg-2">
-                  <input type="number" min="1" v-model.number="inputValue" placeholder="pts" class="form-control">
+                  <input type="number" min="1" v-model.number="inputValue" placeholder="%" class="form-control">
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <div class="col-lg-offset-2 col-lg-10">
                   <button class="btn btn-sm btn-white" type="button" @click="checkForm" >Agregar</button>
@@ -65,7 +65,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Puntos</th>
+                    <th>%</th>
                     <th>Condición</th>
                     <th  v-if="type=='student' || type=='asistant' " >Comentario</th>
                 </tr>
@@ -79,8 +79,12 @@
                       <td v-if="type=='asistant'">
                         <input type="number" v-model="condicion.value" min="0" :max='condicion.pts'>
                       </td>
-                      <td><b>{{condicion.pts}}pts</b></td>
-                      <td>{{condicion.txt}}</td>
+                      <td v-if="type=='teacher'"><b><input type="number" :value="condicion.pts" id=""></b></td>
+                      <td v-else><b>{{condicion.pts}}%</b></td>
+
+                      <td v-if="type=='teacher'"><b><input type="text" :value="condicion.txt" id=""></b></td>
+                      <td v-else>{{condicion.txt}}</td>
+                      <!-- <td v-if="type=='teacher'" class="fa fa-pencil" @click="removeTest(index)"><i></i></td> -->
                       <td v-if="type=='teacher'" class="fa fa-trash" @click="removeTest(index)"><i></i></td>
                       <td v-if="type=='student' || type=='asistant' ">
                         <input v-if="type=='asistant'" type="text" v-model="condicion.comment">
@@ -88,7 +92,7 @@
                       </td>
                 </tr>
             </tbody>
-            <label><b>Total: {{totalPoints}} pts</b></label>
+            <label><b>Total: {{totalPoints}} %</b></label>
         </table>
 
     </div>
@@ -145,7 +149,7 @@ module.exports = {
         this.inputValue =""
         this.inputText=""
         return true;
-        
+
       }
 
       e.preventDefault();

@@ -111,14 +111,14 @@ export default {
                   var component = this
                   $.ajax({
                         dataType: "json",
-                        url: 'http://142.93.52.192:81/ejercicio?id=1',
+                        url: 'http://142.93.52.192:81/ejercicio/1',
                         crossDomain: true,
                         success: function (data) {
                               // console.log(JSON.parse(data));
 
-                              if(data[0] ){
-                                    component.content = data[0].content ? data[0].content : ''
-                                    component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
+                              if(data ){
+                                    component.content = data.content ? data.content : ''
+                                    component.rubrica = data.rubrica ? JSON.parse(data.rubrica) : []
                               }else{
                                     component.content =  ''
                                     component.rubrica = []

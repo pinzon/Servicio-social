@@ -62,41 +62,7 @@
           <!-- <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica> -->
             <h3>Redacta tu respuesta</h3>
             <tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
-        <!-- </div>     -->
-            <!-- <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <h5>Rubrica</h5>
-                </div>
-                <div class="ibox-content">
 
-                   <div class="row ibox-content">
-                        <table >
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Puntos</th>
-                                    <th>Condición</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr v-for="(condicion,index) in rubrica" v-bind:key="index">
-                                    <td>
-                                        <i v-if="condicion.value" class="fa fa-check" aria-hidden="true"></i>
-                                        <i v-else class="fa fa-times" aria-hidden="true"></i>
-
-                                    </td>
-
-                                    <td>{{index + 1}}.- </td>
-                                    <td><b>{{condicion.pts}}pts</b></td>
-                                    <td>{{condicion.txt}}</td>
-
-                                </tr>
-                            </tbody>
-                            <label><b>Total: {{totalPoints}} pts</b></label>
-                        </table>
-                    </div>
-                </div>
-            </div> -->
         </div>
 
         <div class="col-lg-12">
@@ -148,7 +114,7 @@ export default {
                   // console.log($)
                   $.ajax({
                         type: "GET",
-                        url: 'http://142.93.52.192:81/ejercicio?id=1',
+                        url: 'http://142.93.52.192:81/ejercicio/1',
                         crossDomain: true,
                         success: function (data) {
 
