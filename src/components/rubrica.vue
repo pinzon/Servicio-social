@@ -79,10 +79,10 @@
                       <td v-if="type=='asistant'">
                         <input type="number" v-model="condicion.value" min="0" :max='condicion.pts'>
                       </td>
-                      <td v-if="type=='teacher'"><b><input type="number" :value="condicion.pts" id=""></b></td>
+                      <td v-if="type=='teacher'"><b><input type="number" v-model="condicion.pts" id=""></b></td>
                       <td v-else><b>{{condicion.pts}}%</b></td>
 
-                      <td v-if="type=='teacher'"><b><input type="text" :value="condicion.txt" id=""></b></td>
+                      <td v-if="type=='teacher'"><b><input type="text" v-model="condicion.txt" id=""></b></td>
                       <td v-else>{{condicion.txt}}</td>
                       <!-- <td v-if="type=='teacher'" class="fa fa-pencil" @click="removeTest(index)"><i></i></td> -->
                       <td v-if="type=='teacher'" class="fa fa-trash" @click="removeTest(index)"><i></i></td>
