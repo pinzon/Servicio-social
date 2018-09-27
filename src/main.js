@@ -4,9 +4,17 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import './assets/less/style.less'
-import './assets/js/inspinia'
 
-// 不现实vue 命令行的tips
+import {onLoad, onLoad2} from './assets/js/inspinia'
+
+Vue.mixin({
+  mounted () {
+    console.log('mounted mixin')
+    onLoad()
+    onLoad2()
+  }
+})
+
 Vue.config.productionTip = false
 require('../mock/mock')
 

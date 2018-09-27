@@ -5,7 +5,7 @@
  *
  */
 
-$(document).ready(function () {
+var onLoad = function () {
     // Add body-small class if window less than 768px
   if ($(this).width() < 769) {
     $('body').addClass('body-small')
@@ -17,7 +17,9 @@ $(document).ready(function () {
   // $('#side-menu').metisMenu()
 
     // Collapse ibox function
+  $('.collapse-link').unbind('click')
   $('.collapse-link').on('click', function () {
+    console.log('link')
     var ibox = $(this).closest('div.ibox')
     var button = $(this).find('i')
     var content = ibox.children('.ibox-content')
@@ -31,12 +33,14 @@ $(document).ready(function () {
   })
 
     // Close ibox function
+  $('.close-link').unbind('click')
   $('.close-link').on('click', function () {
     var content = $(this).closest('div.ibox')
     content.remove()
   })
 
     // Fullscreen ibox function
+  $('.fullscreen-link').unbind('click')
   $('.fullscreen-link').on('click', function () {
     var ibox = $(this).closest('div.ibox')
     var button = $(this).find('i')
@@ -49,6 +53,7 @@ $(document).ready(function () {
   })
 
     // Close menu in canvas mode
+  $('.close-canvas-menu').unbind('click')
   $('.close-canvas-menu').on('click', function () {
     SmoothlyMenu()
         // $("body").toggleClass("mini-navbar");
@@ -61,6 +66,7 @@ $(document).ready(function () {
   })
 
     // Open close right sidebar
+  $('.right-sidebar-toggle').unbind('click')
   $('.right-sidebar-toggle').on('click', function () {
     $('#right-sidebar').toggleClass('sidebar-open')
   })
@@ -73,6 +79,7 @@ $(document).ready(function () {
   })
 
     // Open close small chat
+  $('.open-small-chat').unbind('click')
   $('.open-small-chat').on('click', function () {
     $(this).children().toggleClass('fa-comments').toggleClass('fa-remove')
     $('.small-chat-box').toggleClass('active')
@@ -85,6 +92,7 @@ $(document).ready(function () {
   })
 
     // Small todo handler
+  $('.check-link').unbind('click')
   $('.check-link').on('click', function () {
     var button = $(this).find('i')
     var label = $(this).next('span')
@@ -165,7 +173,7 @@ $(document).ready(function () {
   $('.full-height-scroll').slimscroll({
     height: '100%'
   })
-})
+}
 
 // Minimalize menu when screen is less than 768px
 $(window).bind('resize', function () {
@@ -178,7 +186,7 @@ $(window).bind('resize', function () {
 
 // Local Storage functions
 // Set proper body class and plugins based on user configuration
-$(document).ready(function () {
+var onLoad2 = function () {
   if (localStorageSupport()) {
     var collapse = localStorage.getItem('collapse_menu')
     var fixedsidebar = localStorage.getItem('fixedsidebar')
@@ -221,7 +229,7 @@ $(document).ready(function () {
       $('.footer').addClass('fixed')
     }
   }
-})
+}
 
 // check if browser support HTML5 local storage
 function localStorageSupport () {
@@ -278,3 +286,5 @@ function WinMove () {
       opacity: 0.8
     }).disableSelection()
 }
+
+export {onLoad, onLoad2}

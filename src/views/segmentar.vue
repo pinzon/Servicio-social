@@ -15,15 +15,15 @@
           </li>
         </ol>
       </div>
-      
+
       <div class="col-lg-2 p-md">
         <button v-on:click="patchEjercicio" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
             <span class="bold">Guardar</span>
         </button>
       </div>
-      
+
     </div>
-    <!--                
+    <!--
               div class="ibox-content">
                 <div v-html="content"></div>
               </div>
@@ -58,8 +58,8 @@
             </div>
             <div class="ibox-content no-padding">
               <ul class="list-group">
-                <li class="list-group-item" v-for='btn in buttons'>
-                  <span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span> 
+                <li class="list-group-item" :key="index" v-for='(btn, index) in buttons'>
+                  <span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span>
                   <p  style="padding-right: 15%">{{btn.text}}</p>
                 </li>
               </ul>
@@ -104,8 +104,8 @@ export default {
                 var atr = "background-position";
                  $('span#'+id).css({
                    "background-position": "0",
-                   "background-size": "200%", 
-                   "transition": "all 0.4s", 
+                   "background-size": "200%",
+                   "transition": "all 0.4s",
                     "background-image": "linear-gradient(to right, #ffffff 50%," + color +" 50%)",
                     'background-position': '-100%',
 
@@ -120,8 +120,8 @@ export default {
                 setTimeout(function(){
                   $('span#'+id).css(atr, val);
                 }, 3000);
-                
-             
+
+
                 $('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                     $(this).removeClass();
                 });
@@ -137,7 +137,7 @@ export default {
                         crossDomain: true,
                         success: function (data) {
                               // console.log(JSON.parse(data));
-                              
+
                               if(data[0] ){
                                     component.content = data[0].content ? data[0].content : ''
                                     component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
@@ -146,7 +146,7 @@ export default {
                                     component.rubrica = []
                               }
 
-                              
+
                         },
                         complete:()=>{
                               component.ajaxFinished = true
@@ -167,26 +167,26 @@ export default {
                             // op: "replace",
                             respuesta: component.content,
                             parts: JSON.stringify(component.buttons),
-                            
-                            
+
+
                         },
 
                         success: function (data) {
                             // console.log(data);
                             swal("Guardado!", "Ejercicio guardado correctamente!", "success");
-                                                          
+
                         },
                         complete:()=>{
                             console.log('Post completado');
-                            
+
                         }
-                         
+
                   });
             }
-      }, 
+      },
       created: async function () {
             this.getEjercicio();
-      }          
+      }
 }
 </script>
 <style scoped>
