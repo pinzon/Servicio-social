@@ -60,10 +60,17 @@
               <ul class="list-group">
                 <li class="list-group-item" :key="index" v-for='(btn, index) in buttons'>
                   
-                  <span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span>
-                  
-                  <input type="text" style="width: 300px;" v-model="btn.text">
-                  <span role="button" class="fa fa-trash" v-on:click="removeTest(index)"></span>
+                  <div class="row">
+                    <div class="col-lg-9 " style="padding-right:0px !important">
+                      <input type="text" style="width: 100%" v-model="btn.text">
+                    </div>
+                    <div class="col-lg-2" style="padding-right:0px !important">
+                      <span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span>
+                    </div>
+                    <div class="col-lg-1">
+                      <span role="button" class="fa fa-trash" v-on:click="removeTest(index)"></span>
+                    </div>
+                  </div>  
                 </li>
               </ul>
             </div>
@@ -131,8 +138,6 @@ export default {
             },
             removeTest: function(index){
                 this.buttons.splice(index,1);
-                //console.log(this.buttons[0])
-                //console.log(index)
             },
 
             getEjercicio: async function(){
@@ -144,8 +149,6 @@ export default {
                         url: 'http://142.93.52.192:81/ejercicio?id=1',
                         crossDomain: true,
                         success: function (data) {
-                              //console.log(JSON.parse(data));
-
                               if(data[0] ){
                                     component.content = data[0].content ? data[0].content : ''
                                     component.buttons = data[0].parts ? JSON.parse(data[0].parts) : []
@@ -165,8 +168,7 @@ export default {
 
 
                 var component = this
-                // var rubo = []
-                  console.log(component.content)
+                  // var rubo = []
                   $.ajax({
                         type: "PATCH",
                         url: 'http://142.93.52.192:81/ejercicio/1',
