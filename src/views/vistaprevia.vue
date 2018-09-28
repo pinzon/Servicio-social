@@ -15,17 +15,10 @@
           </li>
         </ol>
       </div>
-
-      <!-- <div class="col-lg-2 p-md">
-        <button v-on:click="patchEjercicio" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
-            <span class="bold">Guardar</span>
-        </button>
-      </div> -->
-
     </div>
+    
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
-
         <div class="col-lg-4 bg-white" >
           <div class="ibox float-e-margins">
             <div class="ibox-title">
@@ -47,11 +40,8 @@
               </ul>
             </div>
           </div>
-
         </div>
-
         <div class="col-lg-8">
-            <!-- <div class="tab-pane ibox-content" id="preview" role="tabpanel" aria-labelledby="preview-tab" v-html="content"></div> -->
             <div class="ibox float-e-margins">
             <div class="ibox-title">
               <h5>Texto</h5>
@@ -61,41 +51,27 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 </template>
 
 <script>
-
-// import swal from '../../source_page/js/plugins/sweetalert/sweetalert.min.js'
 import swal from 'sweetalert';
-
-
-/* eslint-disable */
 export default {
       data(){
             return {
                   content:'static',
-                  //rubrica: [],
                   buttons: [],
                   ajaxFinished: false,
             }
       },
-
       components:{
             "tinymce" : require('../components/comments.vue').default
             },
-
       methods:{
-            // textEdited: function (text,id,name,anim,color) {
-            //       this.content = text
-            //       this.buttons.push({id: id, text:name, ann:anim, color:color})
-            // },
             animatedDiv: function (id,animation, color){
               if (animation=='subrayar'){
-                //console.log('subrayar'+id+animation+color);
                 var atr = "background-position";
                  $('span#'+id).css({
                    "background-position": "0",
@@ -103,7 +79,6 @@ export default {
                    "transition": "all 0.4s",
                     "background-image": "linear-gradient(to right, #ffffff 50%," + color +" 50%)",
                     'background-position': '-100%',
-
                 });
               }else if (animation=='underline'){
                 var atr = "text-decoration";
@@ -115,20 +90,12 @@ export default {
                 setTimeout(function(){
                   $('span#'+id).css(atr, val);
                 }, 3000);
-
-
                 $('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
                     $(this).removeClass();
                 });
             },
-            // removeTest: function(index){
-            //     this.buttons.splice(index,1);
-            // },
-
             getEjercicio: async function(){
-                  // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
                   var component = this
-                  // console.log($)
                   $.ajax({
                         dataType: "json",
                         url: 'http://142.93.52.192:81/ejercicio?id=1',
@@ -141,32 +108,12 @@ export default {
                                     component.content =  ''
                                     component.buttons = []
                               }
-
-
                         },
                         complete:()=>{
                               component.ajaxFinished = true
                         }
                   });
             },
-            // patchEjercicio: function(){
-            //     var component = this
-            //       $.ajax({
-            //             type: "PATCH",
-            //             url: 'http://142.93.52.192:81/ejercicio/1',
-            //             crossDomain: true,
-            //             data: {
-            //                 content: component.content,
-            //                 parts: JSON.stringify(component.buttons),
-            //             },
-            //             success: function (data) {
-            //                 swal("Guardado!", "Ejercicio guardado correctamente!", "success");
-            //             },
-            //             complete:()=>{
-            //                 console.log('Post completado');
-            //             }
-            //       });
-            // }
       },
       created: async function () {
             this.getEjercicio();
