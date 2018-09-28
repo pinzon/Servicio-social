@@ -92,7 +92,7 @@
                       </td>
                 </tr>
             </tbody>
-            <label><b>Total: {{totalPoints}} %</b></label>
+            <label><b>Total:<br> {{totalPoints}} %</b></label>
         </table>
 
     </div>
@@ -179,7 +179,11 @@ module.exports = {
 
 <style>
 td,th{
-  min-width: 100px;
+  /*min-width: auto;*/
+}
+
+td input[type=number]{
+  width: 50px;
 }
 
 /* .ibox.fullscreen .collapse-link{
