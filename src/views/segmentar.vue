@@ -165,32 +165,21 @@ export default {
                   });
             },
             patchEjercicio: function(){
-
-
                 var component = this
-                  // var rubo = []
                   $.ajax({
                         type: "PATCH",
                         url: 'http://142.93.52.192:81/ejercicio/1',
                         crossDomain: true,
                         data: {
-                            // op: "replace",
-                            respuesta: component.content,
+                            content: component.content,
                             parts: JSON.stringify(component.buttons),
-
-
                         },
-
                         success: function (data) {
-                            // console.log(data);
                             swal("Guardado!", "Ejercicio guardado correctamente!", "success");
-
                         },
                         complete:()=>{
                             console.log('Post completado');
-
                         }
-
                   });
             }
       },
