@@ -59,8 +59,11 @@
             <div class="ibox-content no-padding">
               <ul class="list-group">
                 <li class="list-group-item" :key="index" v-for='(btn, index) in buttons'>
+                  
                   <span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span>
-                  <p  style="padding-right: 15%">{{btn.text}}</p>
+                  
+                  <input type="text" style="width: 300px;" v-model="btn.text">
+                  <span role="button" class="fa fa-trash" v-on:click="removeTest(index)"></span>
                 </li>
               </ul>
             </div>
@@ -126,6 +129,11 @@ export default {
                     $(this).removeClass();
                 });
             },
+            removeTest: function(index){
+                this.buttons.splice(index,1);
+                //console.log(this.buttons[0])
+                //console.log(index)
+            },
 
             getEjercicio: async function(){
                   // var $ = require('../../source_page/js/jquery-3.1.1.min.js')
@@ -136,14 +144,14 @@ export default {
                         url: 'http://142.93.52.192:81/ejercicio?id=1',
                         crossDomain: true,
                         success: function (data) {
-                              // console.log(JSON.parse(data));
+                              //console.log(JSON.parse(data));
 
                               if(data[0] ){
                                     component.content = data[0].content ? data[0].content : ''
-                                    component.rubrica = data[0].rubrica ? JSON.parse(data[0].rubrica) : []
+                                    component.buttons = data[0].parts ? JSON.parse(data[0].parts) : []
                               }else{
                                     component.content =  ''
-                                    component.rubrica = []
+                                    component.buttons = []
                               }
 
 
@@ -161,7 +169,7 @@ export default {
                   console.log(component.content)
                   $.ajax({
                         type: "PATCH",
-                        url: 'http://142.93.52.192:81/ejercicio?id=1',
+                        url: 'http://142.93.52.192:81/ejercicio/1',
                         crossDomain: true,
                         data: {
                             // op: "replace",
