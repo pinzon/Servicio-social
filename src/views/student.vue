@@ -30,7 +30,7 @@
             <button v-on:click="getEjer">Prueba</button>
         </div> -->
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <!-- <span v-html="instruccion"></span>
 
 
@@ -53,10 +53,7 @@
 
         </div>
 
-
-
-
-        <div class="col-lg-6" >
+        <div class="col-lg-8" >
             <!-- <div class="lol">LOL</div> -->
         <!-- <div class="lol"> -->
           <!-- <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica" ></rubrica> -->

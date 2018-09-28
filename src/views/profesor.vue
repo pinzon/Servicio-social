@@ -24,11 +24,11 @@
 
     <div class="wrapper wrapper-content animated fadeIn">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <h3>Redacta el ejercicio </h3>
           <tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited" ></tinymce>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <h3>Escribe los parametros con los que se calificará la respuesta </h3>
           <rubrica v-if="ajaxFinished" type="teacher"  v-bind:content="rubrica" v-on:change="rubricaEdited" ></rubrica>
         </div>
