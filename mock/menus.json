@@ -65,5 +65,10 @@
     "name" : "Segmentar Vista",
     "path" : "/segmentarView",
     "icon" : "fa-address-book"
+  },
+  {
+    "name" : "Vista Previa Segmentar",
+    "path" : "/vistaPreviaSegmentarView",
+    "icon" : "fa-address-book"
   }
 ]

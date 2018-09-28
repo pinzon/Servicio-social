@@ -47,6 +47,10 @@ var router = new Router({
       {
         path: '/asistantView',
         component: require('../views/asistente.vue').default
+      },
+      {
+        path: '/vistaPreviaSegmentarView',
+        component: require('../views/vistaprevia.vue').default
       }]
     }
   ]
