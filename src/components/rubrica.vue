@@ -77,7 +77,7 @@
                           <span>{{condicion.value}}</span>
                       </td>
                       <td v-if="type=='asistant'">
-                        <input type="number" v-model="condicion.value" min="0" :max='condicion.pts'>
+                        <input type="number" v-model="condicion.value" class="comment lol" min="0" :max='condicion.pts'>
                       </td>
                       <td v-if="type=='teacher'"><b><input type="number" v-model="condicion.pts" id=""></b></td>
                       <td v-else><b>{{condicion.pts}}%</b></td>
@@ -87,7 +87,7 @@
                       <!-- <td v-if="type=='teacher'" class="fa fa-pencil" @click="removeTest(index)"><i></i></td> -->
                       <td v-if="type=='teacher'" class="fa fa-trash" @click="removeTest(index)"><i></i></td>
                       <td v-if="type=='student' || type=='asistant' ">
-                        <input v-if="type=='asistant'" type="text" v-model="condicion.comment">
+                        <input v-if="type=='asistant'" type="text" class="comment lol" v-model="condicion.comment">
                         <span v-if="type=='student'">{{condicion.comment}}</span>
                       </td>
                 </tr>
@@ -220,6 +220,10 @@ td,th{
 
 .table-striped > tbody > tr:nth-of-type(odd) {
   background-color: #f9f9f9;
+}
+
+.comment.lol{
+  width: 100%
 }
 
 

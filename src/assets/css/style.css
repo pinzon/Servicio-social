@@ -8164,6 +8164,10 @@ body.md-skin {
 .md-skin .ibox.border-bottom {
   border-bottom: none !important;
 }
+.md-skin .ibox.border-bottom.lol {
+  width: 50%;
+}
+
 .md-skin .ibox-title,
 .md-skin .ibox-content {
   border-style: none;

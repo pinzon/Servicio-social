@@ -30,7 +30,7 @@
             <button v-on:click="getEjer">Prueba</button>
         </div> -->
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <!-- <span v-html="instruccion"></span>
 
 
@@ -54,7 +54,7 @@
 
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-8">
           <!-- <rubrica v-if="ajaxFinished" type="asistant" v-bind:content="rubrica"  ></rubrica> -->
           <h3>Comenta el trabajo del estudiante para una mejor retroalimentación</h3>
           <tinymce id="textEditor"  v-if="ajaxFinished"  v-bind:readonly="true" user="asistant"  v-bind:content="content" v-on:change="textEdited" ></tinymce>
