@@ -23,9 +23,13 @@ var onLoad = function () {
     var ibox = $(this).closest('div.ibox')
     var button = $(this).find('i')
     var content = ibox.children('.ibox-content')
+    var rubix = $(this).closest('div.rubrix')
+    var tarea = $('div.rubrix').siblings('div.tareux')
     content.slideToggle(200)
     button.toggleClass('fa-chevron-up').toggleClass('fa-chevron-down')
     ibox.toggleClass('').toggleClass('border-bottom')
+    rubix.toggleClass('col-xl-4 col-lg-5  col-md-6').toggleClass('col-xl-4 col-lg-2  col-md-6')
+    tarea.toggleClass('col-xl-8 col-lg-7 col-md-6').toggleClass('col-xl-8 col-lg-10 col-md-6')
     setTimeout(function () {
       ibox.resize()
       ibox.find('[id^=map-]').resize()
