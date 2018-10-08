@@ -25,16 +25,6 @@
 
 <script>
 import { menusApi } from '../api'
-// import {onLoad, onLoad2} from '../assets/js/inspinia'
-
-// var mixin = {
-//   mounted () {
-//     console.log('mounted mixin')
-//     onLoad()
-//     onLoad2()
-//   }
-// }
-
 
 export default {
   name: 'layout',

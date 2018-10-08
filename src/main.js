@@ -9,7 +9,7 @@ import {onLoad, onLoad2} from './assets/js/inspinia'
 
 Vue.mixin({
   mounted () {
-    console.log('mounted mixin')
+    // console.log('mounted mixin')
     onLoad()
     onLoad2()
   }

@@ -63,44 +63,48 @@ export default {
 
     mounted: function () {
         let component = this
-        
+
         tinyMCE.baseURL = '/static/'
 
-        var plugins,toolbar,menubar
+        var plugins,toolbar,menubar, contextmenu
 
         switch (this.user) {
             case 'teacher':
-                
+
                 plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help'
                 toolbar= 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+                contextmenu = "link openlink image inserttable | cell row column deletetable"
                 menubar = true
                 break;
 
             case 'student':
-                
+
                 plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_annotate'
                 toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
-                menubar = true
+                menubar = true,
+                contextmenu = "tma_annotate tma_annotatedelete | link openlink image inserttable | cell row column deletetable"
                 break;
-            
-            
+
+
             case 'asistant':
-                
-                plugins = 'tma_annotate'
+
+                plugins = 'tma_annotate contextmenu'
                 toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide '
                 menubar = false
+                contextmenu = 'tma_annotate tma_annotatedelete'
                 break;
-        
-            
+
+
         }
 
 
         this.editor = tinymce.init({
             target: component.$refs.editor,
-            height: 500,
+            height: '68vh',
             menubar:menubar,
             plugins: plugins,
             toolbar1: toolbar,
+            contextmenu: contextmenu,
             image_advtab: true,
             codesample_content_css: 'skins/prism.css',
             init_instance_callback : component.initEditor,
@@ -116,19 +120,18 @@ export default {
                 });
 
 
-                
+
             }
         });
 
         if (this.readonly){
              tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
         }
-
     },
 
     methods:{
         initEditor:function(editor) {
-            this.editor = editor      
+            this.editor = editor
         }
     },
 
@@ -136,7 +139,7 @@ export default {
         this.editor.destroy()
     }
 
-    
+
 }
 </script>
 
