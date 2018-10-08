@@ -48,15 +48,15 @@
 								</a>
 							</li>
 						</ul>
-						<div class="tab-content limit-height">
+						<div class="tab-content">
 							<div id="tab-1" class="tab-pane active">
-								<div class="panel-body">
-                  <span v-html="instruccion"></span>
+								<div class="panel-body limit-height">
+                  					<span class="" v-html="instruccion"></span>
 								</div>
 							</div>
 							<div id="tab-2" class="tab-pane">
 								<div class="panel-body">
-                  <rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica"></rubrica>
+                  					<rubrica v-if="ajaxFinished" type="student" v-bind:content="rubrica"></rubrica>
 								</div>
 							</div>
 						</div>
@@ -107,8 +107,6 @@
 			},
 
 			getEjer: function() {
-
-
 				var component = this
 				var rubo = []
 				// console.log($)

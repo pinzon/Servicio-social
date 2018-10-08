@@ -43,9 +43,9 @@
   														</a>
               </li>
             </ul>
-            <div class="tab-content limit-height">
+            <div class="tab-content ">
               <div id="tab-1" class="tab-pane active">
-                <div class="panel-body">
+                <div class="panel-body limit-height">
                   <span v-html="instruccion"></span>
                 </div>
               </div>
