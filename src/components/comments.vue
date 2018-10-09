@@ -69,8 +69,10 @@ export default {
             target: component.$refs.editor,
             height: 500,
             plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_segmentar',
+            contextmenu: 'tma_segmentar tma_segmentardelete | link openlink image inserttable',
             toolbar1: 'tma_segmentar tma_segmentardelete tma_segmentarhide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
             image_advtab: true,
+            
             
             codesample_content_css: 'skins/prism.css',
              init_instance_callback : component.initEditor,
@@ -82,7 +84,6 @@ export default {
                 });
             }
         });
-        //tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
     },
      methods:{
         initEditor:function(editor) {
@@ -95,4 +96,3 @@ export default {
     }
 }
 </script>
-
