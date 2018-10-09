@@ -17,9 +17,12 @@
       </div>
 
       <div class="col-lg-2 p-md">
-        <button v-on:click="patchEjercicio" type="button" class="btn btn-success "><i class="fa fa-upload"></i>&nbsp;&nbsp;
-            <span class="bold">Guardar</span>
-        </button>
+        <button v-on:click="patchEjercicio" type="button" :class="{'btn':true, 'btn-success': !saved, 'btn-primary': saved }">
+									<i v-if="saved" class="fa fa-check"></i>
+									<span v-if="saved" class="bold">Guardado</span>
+									<i v-if="!saved" class="fa fa-upload"></i>
+									<span v-if="!saved" class="bold">Guardar</span>
+					</button>
       </div>
 
     </div>
@@ -87,19 +90,25 @@ export default {
       data(){
             return {
                   content:'static',
-                  //rubrica: [],
                   buttons: [],
                   ajaxFinished: false,
+                  saved: false
             }
       },
 
       components:{
             "tinymce" : require('../components/comments.vue').default
             },
+      watch: {
+        content: function(content) {
+          this.saved = false
+        }
+      },
 
       methods:{
             textEdited: function (text,id,name,anim,color) {
                   this.content = text
+                  this.saved = false
                   this.buttons.push({id: id, text:name, ann:anim, color:color})
             },
             animatedDiv: function (id,animation, color){
@@ -169,7 +178,8 @@ export default {
                             parts: JSON.stringify(component.buttons),
                         },
                         success: function (data) {
-                            swal("Guardado!", "Ejercicio guardado correctamente!", "success");
+                            //swal("Guardado!", "Ejercicio guardado correctamente!", "success");
+                            component.saved = true;
                         },
                         complete:()=>{
                             console.log('Post completado');
