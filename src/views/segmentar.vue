@@ -112,6 +112,7 @@ export default {
                   this.buttons.push({id: id, text:name, ann:anim, color:color})
             },
             animatedDiv: function (id,animation, color){
+              window.location.hash = id;
               if (animation=='subrayar'){
                 //console.log('subrayar'+id+animation+color);
                 var atr = "background-position";

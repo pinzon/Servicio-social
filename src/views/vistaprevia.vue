@@ -71,6 +71,7 @@ export default {
             },
       methods:{
             animatedDiv: function (id,animation, color){
+              window.location.hash = id;
               if (animation=='subrayar'){
                 var atr = "background-position";
                  $('span#'+id).css({
