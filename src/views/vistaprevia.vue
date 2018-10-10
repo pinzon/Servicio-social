@@ -73,7 +73,6 @@
 						scrollTop: '0px'
 					}, 300);
 				});
-			
 				$(window).scroll(function(){
 					if( $(this).scrollTop() > 0 ){
 						$('#irArriba').slideDown(300);
@@ -142,7 +141,7 @@
 	#irArriba{
 		display:none;
 		padding:20px;
-		background:#024959;
+		background:#2F4050;
 		font-size:20px;
 		color:#fff;
 		cursor:pointer;
