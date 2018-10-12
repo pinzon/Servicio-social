@@ -49,24 +49,16 @@ require('../assets/js/segmentar/plugin.min.js');
 export default {
     props: ['content'],
 
-    data:function(){return {
-        editor : {}
-    }},
+    data: function(){
+        return {
+            editor : {}
+        }
+    },
 
     watch:{
         // content:function () {
         //     tinyMCE.activeEditor.setContent(this.content);
         // }
-
-          less: {
-    files: [
-      'assets/less/*.less',
-      'assets/less/bootstrap/*.less',
-      '/scr/assets/js/segmentar/plugin.min.js',
-      './scr/assets/js/segmentar/plugin.min.js',
-
-    ],}
-
     },
 
     mounted: function () {
