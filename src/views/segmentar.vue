@@ -104,6 +104,7 @@
 					if (animation=='subrayar'){
 						//console.log('subrayar'+id+animation+color);
 						var atr = "background-position";
+						var val = 0;
 						$('span#'+id).css({
 							"background-position": "0",
 							"background-size": "200%",
