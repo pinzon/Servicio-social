@@ -100,7 +100,11 @@
 					this.buttons.push({id: id, text:name, ann:anim, color:color})
 				},
 				animatedDiv: function (id,animation, color){
-					window.location.hash = id;
+					// window.location.hash = ''
+					// // window.location.href = '#' + id;
+					// console.log('going to:' + id)
+					document.getElementById(id).scrollIntoView();
+					
 					if (animation=='subrayar'){
 						//console.log('subrayar'+id+animation+color);
 						var atr = "background-position";
@@ -119,12 +123,14 @@
 							"text-decoration":"underline",
 						});
 					}
-						setTimeout(function(){
-							$('span#'+id).css(atr, val);
-						}, 3000);
-						$('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-							$(this).removeClass();
-						});
+
+					setTimeout(function(){
+						$('span#'+id).css(atr, val);
+					}, 3000);
+
+					$('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+						$(this).removeClass();
+					});
 				},
 				removeTest: function(index){
 					this.buttons.splice(index,1);

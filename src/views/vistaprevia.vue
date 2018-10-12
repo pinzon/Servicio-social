@@ -87,7 +87,7 @@
 		},
 		methods:{
 			animatedDiv: function (id,animation, color){
-					window.location.hash = id;
+					document.getElementById(id).scrollIntoView();
 					if (animation=='subrayar'){
 							var atr = "background-position";
 								$('span#'+id).css({
