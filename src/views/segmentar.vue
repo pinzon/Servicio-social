@@ -44,28 +44,7 @@
 				</div>
 
 				<div class="col-lg-5 bg-white" >
-					<div class="ibox float-e-margins">
-						<div class="ibox-title">
-							<h5>Comentarios</h5>
-						</div>
-						<div class="ibox-content no-padding">
-							<ul class="list-group">
-								<li class="list-group-item" :key="index" v-for='(btn, index) in buttons'>
-									<div class="row">
-										<div class="col-lg-9 " style="padding-right:0px !important">
-											<input type="text" style="width: 100%" v-model="btn.text">
-										</div>
-										<div class="col-lg-2" style="padding-right:0px !important">
-											<span class="badge badge-success font-size-12" role="button" v-on:click='animatedDiv(btn.id,btn.ann,btn.color)'>Mostrar</span>
-										</div>
-										<div class="col-lg-1">
-											<span role="button" class="fa fa-trash" v-on:click="removeTest(index)"></span>
-										</div>
-									</div>  
-								</li>
-							</ul>
-						</div>
-					</div>
+					<buttons v-if="ajaxFinished" type="teacher" v-bind:buttons="buttons"></buttons>
 				</div>
 			</div>
 		</div>
@@ -86,7 +65,8 @@
 		},
 
       	components:{
-            "tinymce" : require('../components/comments.vue').default
+			"tinymce" : require('../components/comments.vue').default,
+			"buttons" : require('../components/botones.vue').default
     	},
 		watch: {
 			content: function(content) {
@@ -99,43 +79,6 @@
 					this.saved = false
 					this.buttons.push({id: id, text:name, ann:anim, color:color})
 				},
-				animatedDiv: function (id,animation, color){
-					// window.location.hash = ''
-					// // window.location.href = '#' + id;
-					// console.log('going to:' + id)
-					document.getElementById(id).scrollIntoView();
-					
-					if (animation=='subrayar'){
-						//console.log('subrayar'+id+animation+color);
-						var atr = "background-position";
-						var val = 0;
-						$('span#'+id).css({
-							"background-position": "0",
-							"background-size": "200%",
-							"transition": "all 0.4s",
-							"background-image": "linear-gradient(to right, #ffffff 50%," + color +" 50%)",
-							'background-position': '-100%',
-						});
-					}else if (animation=='underline'){
-						var atr = "text-decoration";
-						var val = '';
-						$('span#'+id).css({
-							"text-decoration":"underline",
-						});
-					}
-
-					setTimeout(function(){
-						$('span#'+id).css(atr, val);
-					}, 3000);
-
-					$('span#'+id).removeClass().addClass(animation + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-						$(this).removeClass();
-					});
-				},
-				removeTest: function(index){
-					this.buttons.splice(index,1);
-				},
-
 				getEjercicio: async function(){
 					var component = this
 					$.ajax({
@@ -170,7 +113,7 @@
 							component.saved = true;
 						},
 						complete:()=>{
-							console.log('Post completado');
+							// console.log('Post completado');
 						}
 					});
 				}
