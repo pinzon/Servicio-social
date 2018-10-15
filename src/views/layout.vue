@@ -40,8 +40,8 @@ export default {
   },
   created () {
     menusApi().then((resp) => {
-      console.log('res', resp)
-      console.log('this', this)
+      // console.log('res', resp)
+      // console.log('this', this)
       this.data = resp.data
     })
   }

@@ -76,7 +76,7 @@ export default {
             
             
             codesample_content_css: 'skins/prism.css',
-             init_instance_callback : component.initEditor,
+            init_instance_callback : component.initEditor,
             setup:function(ed) {
                 ed.on('submitcomment', function(e) {
                     //console.log('the event object ', e);
@@ -85,10 +85,16 @@ export default {
                 });
             }
         });
+
     },
      methods:{
         initEditor:function(editor) {
             this.editor = editor      
+        },
+
+        deleteCommentInEditor(id){
+            var newElement = document.createTextNode(tinymce.activeEditor.dom.select('span#' + id)[0].innerHTML)
+            tinymce.activeEditor.dom.replace( newElement, tinymce.activeEditor.dom.select('span#' + id)[0]);
         }
     },
 

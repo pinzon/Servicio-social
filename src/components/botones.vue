@@ -34,9 +34,7 @@
 			}
 		},
         data: function() {
-            return {
-                buttons
-            }
+            return {}
         },
         watch: {
             content:{
