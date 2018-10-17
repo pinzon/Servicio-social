@@ -1,5 +1,5 @@
 <template>
-    <textarea ref='editor'  v-model="content"></textarea>
+	<textarea ref='editor'  v-model="content"></textarea>
 </template>
 <script>
 
@@ -47,59 +47,66 @@ require('../assets/js/segmentar/plugin.min.js');
 
 
 export default {
-    props: ['content'],
+	props: ['content'],
 
-    data: function(){
-        return {
-            editor : {}
-        }
-    },
+	data: function(){
+		return {
+			editor : {}
+		}
+	},
 
-    watch:{
-        // content:function () {
-        //     tinyMCE.activeEditor.setContent(this.content);
-        // }
-    },
+	watch:{
+		// content:function () {
+		//     tinyMCE.activeEditor.setContent(this.content);
+		// }
+	},
 
-    mounted: function () {
-        let component = this
-        
-        tinyMCE.baseURL = '/static/'
+	mounted: function () {
+		let component = this
 
-        tinymce.init({
-            target: component.$refs.editor,
-            height: 500,
-            plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_segmentar',
-            contextmenu: 'tma_segmentar tma_segmentardelete | link openlink image inserttable',
-            toolbar1: 'tma_segmentar tma_segmentardelete tma_segmentarhide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-            image_advtab: true,
-            
-            
-            codesample_content_css: 'skins/prism.css',
-            init_instance_callback : component.initEditor,
-            setup:function(ed) {
-                ed.on('submitcomment', function(e) {
-                    //console.log('the event object ', e);
-                    //console.log('the editor object ', ed);
-                    component.$emit('textedited', ed.getContent(), e.id , e.dataAnnotation , e.anim, e.color)
-                });
-            }
+		tinyMCE.baseURL = '/static/'
+
+		tinymce.init({
+			target: component.$refs.editor,
+			height: 500,
+			plugins: 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_segmentar',
+			contextmenu: 'tma_segmentar tma_segmentardelete | link openlink image inserttable',
+			toolbar1: 'tma_segmentar tma_segmentardelete tma_segmentarhide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+			image_advtab: true,
+
+
+			codesample_content_css: 'skins/prism.css',
+			init_instance_callback : component.initEditor,
+			setup:function(ed) {
+        ed.on('change', function(e) {
+					component.$emit('change', ed.getContent())
+				});
+
+				ed.on('submitcomment', function(e) {
+					component.$emit('comment-added', ed.getContent(), e.id , e.dataAnnotation , e.anim, e.color)
         });
 
-    },
-     methods:{
-        initEditor:function(editor) {
-            this.editor = editor      
-        },
+        ed.on('deletecomment', function(e) {
+					component.$emit('comment-deleted', e.id)
+				});
+			}
+		});
 
-        deleteCommentInEditor(id){
-            var newElement = document.createTextNode(tinymce.activeEditor.dom.select('span#' + id)[0].innerHTML)
-            tinymce.activeEditor.dom.replace( newElement, tinymce.activeEditor.dom.select('span#' + id)[0]);
-        }
-    },
+	},
+	 methods:{
+		initEditor:function(editor) {
+			this.editor = editor
+		},
 
-    beforeDestroy:function () {
-        this.editor.destroy()
-    }
+		deleteCommentInEditor(id){
+			var newElement = document.createTextNode(tinymce.activeEditor.dom.select('span#' + id)[0].innerHTML)
+      tinymce.activeEditor.dom.replace( newElement, tinymce.activeEditor.dom.select('span#' + id)[0]);
+      tinymce.activeEditor.fire('change')
+		}
+	},
+
+	beforeDestroy:function () {
+		this.editor.destroy()
+	}
 }
 </script>

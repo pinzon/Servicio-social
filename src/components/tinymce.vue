@@ -1,5 +1,5 @@
 <template>
-    <textarea ref="editor" v-model="content"></textarea>
+	<textarea ref="editor" v-model="content"></textarea>
 </template>
 <script>
 /* eslint-disable */
@@ -42,102 +42,102 @@ require('tinymce/plugins/help')
 require('../assets/js/tma_annotate/plugin.min.js');
 
 export default {
-    props: {
-        content:{
-            type: String,
-            default: ''
-        },
-        readonly:{
-            type: Boolean,
-            default: false
-        },
-        user:{
-            type: String,
-            default: 'teacher'
-        }
-    },
+	props: {
+		content:{
+			type: String,
+			default: ''
+		},
+		readonly:{
+			type: Boolean,
+			default: false
+		},
+		user:{
+			type: String,
+			default: 'teacher'
+		}
+	},
 
-    data:function(){return {
-        editor : {}
-    }},
+	data:function(){return {
+		editor : {}
+	}},
 
-    mounted: function () {
-        let component = this
+	mounted: function () {
+		let component = this
 
-        tinyMCE.baseURL = '/static/'
+		tinyMCE.baseURL = '/static/'
 
-        var plugins,toolbar,menubar, contextmenu
+		var plugins,toolbar,menubar, contextmenu
 
-        switch (this.user) {
-            case 'teacher':
+		switch (this.user) {
+			case 'teacher':
 
-                plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help'
-                toolbar= 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
-                contextmenu = "link openlink image inserttable | cell row column deletetable"
-                menubar = true
-                break;
+				plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help'
+				toolbar= 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+				contextmenu = "link openlink image inserttable | cell row column deletetable"
+				menubar = true
+				break;
 
-            case 'student':
+			case 'student':
 
-                plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_annotate'
-                toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
-                menubar = true,
-                contextmenu = "tma_annotate tma_annotatedelete | link openlink image inserttable | cell row column deletetable"
-                break;
-
-
-            case 'asistant':
-
-                plugins = 'tma_annotate contextmenu'
-                toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide '
-                menubar = false
-                contextmenu = 'tma_annotate tma_annotatedelete'
-                break;
+				plugins = 'print preview fullpage  searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount  imagetools media  contextmenu colorpicker textpattern help tma_annotate'
+				toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide | formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat'
+				menubar = true,
+				contextmenu = "tma_annotate tma_annotatedelete | link openlink image inserttable | cell row column deletetable"
+				break;
 
 
-        }
+			case 'asistant':
+
+				plugins = 'tma_annotate contextmenu'
+				toolbar= 'tma_annotate tma_annotatedelete tma_annotatehide '
+				menubar = false
+				contextmenu = 'tma_annotate tma_annotatedelete'
+				break;
 
 
-        this.editor = tinymce.init({
-            target: component.$refs.editor,
-            height: '68vh',
-            menubar:menubar,
-            plugins: plugins,
-            toolbar1: toolbar,
-            contextmenu: contextmenu,
-            image_advtab: true,
-            codesample_content_css: 'skins/prism.css',
-            init_instance_callback : component.initEditor,
-            setup:function(ed) {
-                // var component = component
-                // console.log(coomponent)
-                ed.on('change', function(e) {
-                    // console.log(component)
-                    // console.log('the event object ', e);
-                    // console.log('the editor object ', ed);
-                    // console.log('the content ', ed.getContent());
-                    component.$emit('change', ed.getContent())
-                });
+		}
+
+
+		this.editor = tinymce.init({
+			target: component.$refs.editor,
+			height: '68vh',
+			menubar:menubar,
+			plugins: plugins,
+			toolbar1: toolbar,
+			contextmenu: contextmenu,
+			image_advtab: true,
+			codesample_content_css: 'skins/prism.css',
+			init_instance_callback : component.initEditor,
+			setup:function(ed) {
+				// var component = component
+				// console.log(coomponent)
+				ed.on('change', function(e) {
+					// console.log(component)
+					// console.log('the event object ', e);
+					// console.log('the editor object ', ed);
+					// console.log('the content ', ed.getContent());
+					component.$emit('change', ed.getContent())
+				});
 
 
 
-            }
-        });
+			}
+		});
 
-        if (this.readonly){
-             tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
-        }
-    },
+		if (this.readonly){
+			 tinymce.activeEditor.getBody().setAttribute('contenteditable', false);
+		}
+	},
 
-    methods:{
-        initEditor:function(editor) {
-            this.editor = editor
-        }
-    },
+	methods:{
+		initEditor:function(editor) {
+			this.editor = editor
+		}
+	},
 
-    beforeDestroy:function () {
-        this.editor.destroy()
-    }
+	beforeDestroy: function () {
+		this.editor.destroy()
+	}
 
 
 }

@@ -99,8 +99,6 @@
 						rubrica: JSON.stringify(component.rubrica)
 					},
 					success: function(data) {
-						// console.log('data posted');
-						//swal("Guardado!", "Ejercicio guardado correctamente!", "success");
 						component.saved = true
 					}
 				});
