@@ -83,14 +83,9 @@
 			})
 			$(window).scroll(function() {
 				console.log($(this).scrollTop());
-				if( $(this).scrollTop() > 0 ){
+				if( $(this).scrollTop() > 160 ){
 					$("#scroll").css({
 						"margin-top": ($(window).scrollTop() - 160) + "px",
-					});
-				}
-				if( $(this).scrollTop() < 160 ){ 
-					$("#scroll").css({
-						"margin-top":  "0px",
 					});
 				}
 			});
