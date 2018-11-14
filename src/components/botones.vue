@@ -61,12 +61,12 @@
         });
       });
       $(window).scroll(function() {
-				if( $(this).scrollTop() > 0 ){
+				if( $(this).scrollTop() > 0  && $(this).scrollTop() > 160 ){
 					$("#scroll").css({
 						"margin-top": ($(window).scrollTop() - 160) + "px",
 					});
 				}
-				else if( $(this).scrollTop() == 0 ){
+				else if( $(this).scrollTop() < 160 ){
 					$("#scroll").css({
 						"margin-top": "0px",
 					});
