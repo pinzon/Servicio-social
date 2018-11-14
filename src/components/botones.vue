@@ -59,11 +59,25 @@
             $('#irArriba').slideUp(300);
           }
         });
-      })
+      });
+      $(window).scroll(function() {
+				console.log($(this).scrollTop());
+				if( $(this).scrollTop() > 0 ){
+					$("#scroll").css({
+						"margin-top": ($(window).scrollTop() - 160) + "px",
+					});
+				}
+				if( $(this).scrollTop() < 160 ){ 
+					$("#scroll").css({
+						"margin-top":  "0px",
+					});
+				}
+			});
     },
     methods: {
       animatedDiv: function(id, animation, color) {
         document.getElementById(id).scrollIntoView();
+				window.scrollBy(0, -40);
         if (animation == 'subrayar') {
           var atr = "background-position";
           var val = 0;

@@ -20,7 +20,7 @@
 
 		<div class="wrapper wrapper-content animated fadeIn">
 			<div class="row">
-				<div class="col-lg-4 bg-white" >
+				<div id = "scroll" class="col-lg-4 bg-white" >
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 									<h5>Comentarios</h5>
@@ -81,6 +81,19 @@
 					}
 				});
 			})
+			$(window).scroll(function() {
+				console.log($(this).scrollTop());
+				if( $(this).scrollTop() > 0 ){
+					$("#scroll").css({
+						"margin-top": ($(window).scrollTop() - 160) + "px",
+					});
+				}
+				if( $(this).scrollTop() < 160 ){ 
+					$("#scroll").css({
+						"margin-top":  "0px",
+					});
+				}
+			});
 		},
 		components:{
 			"tinymce" : require('../components/comments.vue').default
@@ -88,6 +101,7 @@
 		methods:{
 			animatedDiv: function (id,animation, color){
 					document.getElementById(id).scrollIntoView();
+					window.scrollBy(0, -40);
 					if (animation=='subrayar'){
 							var atr = "background-position";
 								$('span#'+id).css({
