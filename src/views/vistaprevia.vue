@@ -20,7 +20,7 @@
 
 		<div class="wrapper wrapper-content animated fadeIn">
 			<div class="row">
-				<div id = "scroll" class="col-lg-4 bg-white" >
+				<div id="scroll" class="col-lg-4 bg-white" >
 						<div class="ibox float-e-margins">
 							<div class="ibox-title">
 									<h5>Comentarios</h5>
@@ -82,9 +82,14 @@
 				});
 			})
 			$(window).scroll(function() {
-				if( $(this).scrollTop() > 160 ){
+				if( $(this).scrollTop() > 0 ){
 					$("#scroll").css({
 						"margin-top": ($(window).scrollTop() - 160) + "px",
+					});
+				}
+				else if( $(this).scrollTop() == 0 ){
+					$("#scroll").css({
+						"margin-top": "0px",
 					});
 				}
 			});

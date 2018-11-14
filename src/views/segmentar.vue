@@ -45,7 +45,7 @@
 					</div>
 				</div>
 
-				<div class="col-lg-5 bg-white">
+				<div id="scroll" class="col-lg-5 bg-white">
 					<buttons ref="buttons" v-if="ajaxFinished" type="teacher" v-bind:buttons="buttons" v-on:comment-deleted="deleteInEditor" ></buttons>
 				</div>
 			</div>
