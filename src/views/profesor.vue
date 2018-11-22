@@ -16,22 +16,17 @@
 				</ol>
 			</div>
 			<div class="col-lg-2 p-md">
-				<button v-on:click="saveEx" type="button" :class="{'btn':true, 'btn-success': !saved, 'btn-primary': saved }">
-					<i v-if="saved" class="fa fa-check"></i>
-					<span v-if="saved" class="bold">Guardado</span>
-					<i v-if="!saved" class="fa fa-upload"></i>
-					<span v-if="!saved" class="bold">Guardar</span>
-				</button>
+				<save-button @click="saveEx" :saved="saved"></save-button>
 			</div>
 		</div>
 
 		<div class="wrapper wrapper-content animated fadeIn">
 			<div class="row">
-				<div class="tareux col-xl-8 col-lg-7 col-md-6">
+				<div class="tareux col-xl-8 col-lg-6 col-md-6">
 					<h3>Redacta el ejercicio </h3>
 					<tinymce id="textEditor" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"></tinymce>
 				</div>
-				<div class="rubrix col-xl-4 col-lg-5  col-md-6">
+				<div class="rubrix col-xl-4 col-lg-6  col-md-6">
 					<h3>Escribe los parametros con los que se calificará la respuesta </h3>
 					<rubrica v-if="ajaxFinished" type="teacher" v-bind:content="rubrica" v-on:change="rubricaEdited"></rubrica>
 				</div>
@@ -64,7 +59,8 @@
 
 		components: {
 			"tinymce": require('../components/tinymce.vue').default,
-			"rubrica": require('../components/rubrica.vue').default
+			"rubrica": require('../components/rubrica.vue').default,
+			'save-button': require('../components/saveButton.vue').default
 		},
 		watch: {
 			rubrica: function(rubrica) {

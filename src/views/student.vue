@@ -16,23 +16,19 @@
 				</ol>
 			</div>
 			<div class="col-lg-2 p-md">
-				<button v-on:click="patchEjercicio" type="button" :class="{'btn':true, 'btn-success': !saved, 'btn-primary': saved }">
+				<!-- <button v-on:click="patchEjercicio" type="button" :class="{'btn':true, 'btn-success': !saved, 'btn-primary': saved }">
 									<i v-if="saved" class="fa fa-check"></i>
 									<span v-if="saved" class="bold">Guardado</span>
 									<i v-if="!saved" class="fa fa-upload"></i>
 									<span v-if="!saved" class="bold">Guardar</span>
-								</button>
+								</button> -->
+				<save-button @click="patchEjercicio" :saved="saved"></save-button>
 			</div>
 		</div>
 
 		<div class="wrapper wrapper-content animated fadeIn">
 
 			<div class="row">
-
-				<div class="col-lg-6">
-					<h3>Redacta tu respuesta</h3>
-					<tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"></tinymce>
-				</div>
 
 				<div class="col-lg-6">
 					<div class="tabs-container">
@@ -62,6 +58,13 @@
 						</div>
 					</div>
 				</div>
+
+				<div class="col-lg-6">
+					<h3>Redacta tu respuesta</h3>
+					<tinymce id="textEditor" user="student" v-if="ajaxFinished" v-bind:content="content" v-on:change="textEdited"></tinymce>
+				</div>
+
+				
 			</div>
 
 
@@ -91,7 +94,8 @@
 
 		components: {
 			"tinymce": require('../components/tinymce.vue').default,
-			"rubrica": require('../components/rubrica.vue').default
+			"rubrica": require('../components/rubrica.vue').default,
+			'save-button': require('../components/saveButton.vue').default
 		},
 
 		watch: {
@@ -176,7 +180,7 @@
 
 	.limit-height {
 		height: 70vh;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 
 	.collapse-link {

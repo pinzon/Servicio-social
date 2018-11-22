@@ -16,12 +16,13 @@
 				</ol>
 			</div>
 			<div class="col-lg-2 p-md">
-				<button v-on:click="patchEjercicio" type="button" :class="{'btn':true, 'btn-success': !saved, 'btn-primary': saved }">
-			  <i v-if="saved" class="fa fa-check"></i>
-			  <span v-if="saved" class="bold">Guardado</span>
-			  <i v-if="!saved" class="fa fa-upload"></i>
-			  <span v-if="!saved" class="bold">Guardar</span>
-			</button>
+				<!-- <button v-on:click="patchEjercicio" type="button" :class="{'btn':true, 'btn-success': !saved, 'btn-primary': saved }">
+				<i v-if="saved" class="fa fa-check"></i>
+				<span v-if="saved" class="bold">Guardado</span>
+				<i v-if="!saved" class="fa fa-upload"></i>
+				<span v-if="!saved" class="bold">Guardar</span>
+			</button> -->
+				<save-button @click="patchEjercicio" :saved="saved"></save-button>
 
 			</div>
 		</div>
@@ -29,7 +30,7 @@
 		<div class="wrapper wrapper-content animated fadeIn">
 
 			<div class="row">
-				<div class="col-xl-4 col-lg-5  col-md-6">
+				<div class="col-xl-4 col-lg-6  col-md-6">
 					<div class="tabs-container">
 						<ul class="nav nav-tabs">
 							<li class="active">
@@ -58,7 +59,7 @@
 					</div>
 				</div>
 
-				<div class="col-xl-8 col-lg-7 col-md-6">
+				<div class="col-xl-8 col-lg-6 col-md-6">
 					<!-- <rubrica v-if="ajaxFinished" type="asistant" v-bind:content="rubrica"  ></rubrica> -->
 					<h3>Comenta el trabajo del estudiante para una mejor retroalimentación</h3>
 					<tinymce id="textEditor" v-if="ajaxFinished" v-bind:readonly="true" user="asistant" v-bind:content="content" v-on:change="textEdited"></tinymce>
@@ -89,7 +90,9 @@
 
 		components: {
 			"tinymce": require('../components/tinymce.vue').default,
-			"rubrica": require('../components/rubrica.vue').default
+			"rubrica": require('../components/rubrica.vue').default,
+			'save-button': require('../components/saveButton.vue').default
+
 		},
 
 		methods: {
@@ -173,6 +176,6 @@
 <style scoped>
 	.limit-height {
 		height: 70vh;
-		overflow-y: scroll;
+		overflow-y: auto;
 	}
 </style>
