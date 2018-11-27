@@ -68,7 +68,7 @@
 				}
 				else if( $(this).scrollTop() < 160 ){
 					$("#scroll").css({
-						"margin-top": "0px",
+						"margin-top": "40px",
 					});
 				}
 			});
