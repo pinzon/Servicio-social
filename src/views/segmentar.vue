@@ -45,7 +45,7 @@
 					</div>
 				</div>
 
-				<div id="scroll" class="col-lg-5 bg-white">
+				<div id="scroll" class="col-lg-5 bg-white margin-bottones">
 					<buttons ref="buttons" v-if="ajaxFinished" type="teacher" v-bind:buttons="buttons" v-on:comment-deleted="deleteInEditor" ></buttons>
 				</div>
 			</div>
@@ -148,5 +148,7 @@
 </script>
 
 <style scoped>
-
+.margin-bottones{
+	margin-top: 40px;
+}
 </style>
